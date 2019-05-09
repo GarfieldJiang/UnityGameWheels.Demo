@@ -1,0 +1,3 @@
+[submodule "Assets/UnityGameWheels"]
+	path = Assets/UnityGameWheels
+	url = git@gitee.com:jehovah0121/UnityGameWheels.Unity.git
