@@ -24,12 +24,20 @@
       <AssetBundlePath>prefab_ab_cycle/1</AssetBundlePath>
     </AssetInfo>
     <AssetInfo>
+      <Guid>15135e86e52ab4b038dcbd61d7549e9f</Guid>
+      <AssetBundlePath>sa/char/prefabs_another</AssetBundlePath>
+    </AssetInfo>
+    <AssetInfo>
       <Guid>27dbec7630294d64c9ab91261656cbd4</Guid>
       <AssetBundlePath>sa/2d</AssetBundlePath>
     </AssetInfo>
     <AssetInfo>
       <Guid>31f6763de0920574092c8a69a66c717e</Guid>
       <AssetBundlePath>scene_test/scenes</AssetBundlePath>
+    </AssetInfo>
+    <AssetInfo>
+      <Guid>3c788335fe2df44ca9bbf95bc580ce4d</Guid>
+      <AssetBundlePath>fx/glass</AssetBundlePath>
     </AssetInfo>
     <AssetInfo>
       <Guid>41db8cbfecdbdb54ab2bac971c05547a</Guid>
@@ -52,12 +60,24 @@
       <AssetBundlePath>scene_test/mat</AssetBundlePath>
     </AssetInfo>
     <AssetInfo>
+      <Guid>794a3489a6afd4daf80d98a5844341b9</Guid>
+      <AssetBundlePath>fx/light_cookie</AssetBundlePath>
+    </AssetInfo>
+    <AssetInfo>
       <Guid>87a2357765801c34292d6718d8b4d770</Guid>
       <AssetBundlePath>sa/char/prefabs2</AssetBundlePath>
     </AssetInfo>
     <AssetInfo>
       <Guid>a869b219648fd6c47a3c134f3520ccff</Guid>
       <AssetBundlePath>sa/cam/prefabs</AssetBundlePath>
+    </AssetInfo>
+    <AssetInfo>
+      <Guid>ab90c5d984b4d4e9e935ae8760fd47ef</Guid>
+      <AssetBundlePath>fx/projector</AssetBundlePath>
+    </AssetInfo>
+    <AssetInfo>
+      <Guid>d8cfa4746d26d4715b9f848bce1e2f14</Guid>
+      <AssetBundlePath>fx/light_flare</AssetBundlePath>
     </AssetInfo>
     <AssetInfo>
       <Guid>e09f07f9be24b2d4180a74a671348b5b</Guid>
@@ -74,9 +94,41 @@
   </AssetInfos>
   <AssetBundleInfos>
     <AssetBundleInfo>
+      <AssetBundlePath>fx/glass</AssetBundlePath>
+      <AssetBundleGroup>3</AssetBundleGroup>
+      <DontPack>true</DontPack>
+      <AssetGuids>
+        <string>3c788335fe2df44ca9bbf95bc580ce4d</string>
+      </AssetGuids>
+    </AssetBundleInfo>
+    <AssetBundleInfo>
+      <AssetBundlePath>fx/light_cookie</AssetBundlePath>
+      <AssetBundleGroup>3</AssetBundleGroup>
+      <DontPack>true</DontPack>
+      <AssetGuids>
+        <string>794a3489a6afd4daf80d98a5844341b9</string>
+      </AssetGuids>
+    </AssetBundleInfo>
+    <AssetBundleInfo>
+      <AssetBundlePath>fx/light_flare</AssetBundlePath>
+      <AssetBundleGroup>3</AssetBundleGroup>
+      <DontPack>true</DontPack>
+      <AssetGuids>
+        <string>d8cfa4746d26d4715b9f848bce1e2f14</string>
+      </AssetGuids>
+    </AssetBundleInfo>
+    <AssetBundleInfo>
+      <AssetBundlePath>fx/projector</AssetBundlePath>
+      <AssetBundleGroup>3</AssetBundleGroup>
+      <DontPack>true</DontPack>
+      <AssetGuids>
+        <string>ab90c5d984b4d4e9e935ae8760fd47ef</string>
+      </AssetGuids>
+    </AssetBundleInfo>
+    <AssetBundleInfo>
       <AssetBundlePath>prefab_ab_cycle/1</AssetBundlePath>
       <AssetBundleGroup>0</AssetBundleGroup>
-      <DontPack>false</DontPack>
+      <DontPack>true</DontPack>
       <AssetGuids>
         <string>0a2c28bb69bf94322978fc03927d55e4</string>
         <string>66aef1070a1c547aebe1d38948780b6e</string>
@@ -102,7 +154,7 @@
     <AssetBundleInfo>
       <AssetBundlePath>sa/cam/prefabs</AssetBundlePath>
       <AssetBundleGroup>1</AssetBundleGroup>
-      <DontPack>false</DontPack>
+      <DontPack>true</DontPack>
       <AssetGuids>
         <string>a869b219648fd6c47a3c134f3520ccff</string>
       </AssetGuids>
@@ -119,13 +171,15 @@
     <AssetBundleInfo>
       <AssetBundlePath>sa/char/prefabs_another</AssetBundlePath>
       <AssetBundleGroup>2</AssetBundleGroup>
-      <DontPack>false</DontPack>
-      <AssetGuids />
+      <DontPack>true</DontPack>
+      <AssetGuids>
+        <string>15135e86e52ab4b038dcbd61d7549e9f</string>
+      </AssetGuids>
     </AssetBundleInfo>
     <AssetBundleInfo>
       <AssetBundlePath>sa/char/prefabs2</AssetBundlePath>
       <AssetBundleGroup>1</AssetBundleGroup>
-      <DontPack>false</DontPack>
+      <DontPack>true</DontPack>
       <AssetGuids>
         <string>87a2357765801c34292d6718d8b4d770</string>
         <string>e09f07f9be24b2d4180a74a671348b5b</string>

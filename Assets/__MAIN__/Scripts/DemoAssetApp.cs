@@ -1,4 +1,6 @@
-﻿using UnityEngine.Serialization;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine.Serialization;
 
 namespace COL.UnityGameWheels.Demo
 {
@@ -15,16 +17,21 @@ namespace COL.UnityGameWheels.Demo
     {
         private static DemoAssetApp s_Instance = null;
 
-        [SerializeField] private AssetManager m_AssetManager = null;
+        [SerializeField]
+        private AssetManager m_AssetManager = null;
 
-        [SerializeField] private RefPoolManager m_RefPoolManager = null;
+        [SerializeField]
+        private RefPoolManager m_RefPoolManager = null;
 
-        [SerializeField] private DownloadManager m_DownloadManager = null;
+        [SerializeField]
+        private DownloadManager m_DownloadManager = null;
 
-        [SerializeField] private RemoteIndexFileInfo m_RemoteIndexFileInfo = null;
+        [SerializeField]
+        private RemoteIndexFileInfo m_RemoteIndexFileInfo = null;
 
         private int[] m_AvailableGroupIds = null;
-        private int m_BeingUpdateGroupIndex = 0;
+        private readonly HashSet<int> m_GroupIdsToUpdate = new HashSet<int>();
+
 
         public static bool IsAvailable
         {
@@ -139,58 +146,60 @@ namespace COL.UnityGameWheels.Demo
         private void OnUpdateCheckSuccess(object context)
         {
             Debug.LogFormat("[DemoAssetApp OnUpdateCheckSuccess] context='{0}'.", context);
-            ContinueUpdateResourceGroupsOrUseAssets();
+            UpdateCommonGroup();
+        }
+
+        private void UpdateCommonGroup()
+        {
+            if (Asset.ResourceUpdater.GetResourceGroupStatus(0) == ResourceGroupStatus.UpToDate)
+            {
+                ContinueUpdateResourceGroupsOrUseAssets();
+                return;
+            }
+
+            Asset.ResourceUpdater.StartUpdatingResourceGroup(0, new ResourceGroupUpdateCallbackSet
+            {
+                OnAllFailure = OnUpdateAllResourcesFailure,
+                OnAllSuccess = OnUpdateAllResourcesSuccess,
+                OnSingleFailure = OnUpdateResourceFailure,
+                OnSingleSuccess = OnUpdateResourceSuccess,
+                OnSingleProgress = OnUpdateResourceProgress,
+            }, 0);
         }
 
         private void ContinueUpdateResourceGroupsOrUseAssets()
         {
             m_AvailableGroupIds = Asset.ResourceUpdater.GetAvailableResourceGroupIds();
-            while (m_BeingUpdateGroupIndex < m_AvailableGroupIds.Length)
+
+            foreach (var groupId in m_AvailableGroupIds.Where(id => id != 0))
             {
-                int currentGroupId = m_AvailableGroupIds[m_BeingUpdateGroupIndex];
-                if (Asset.ResourceUpdater.GetResourceGroupStatus(currentGroupId) == ResourceGroupStatus.UpToDate)
+                if (Asset.ResourceUpdater.GetResourceGroupStatus(groupId) == ResourceGroupStatus.OutOfDate)
                 {
-                    Debug.LogFormat(
-                        "[DemoAssetApp ContinueUpdateResourceGroupsOrUseAssets] Resource group '{0}' needs no update.",
-                        currentGroupId);
-                    m_BeingUpdateGroupIndex++;
-                }
-                else
-                {
-                    break;
+                    m_GroupIdsToUpdate.Add(groupId);
                 }
             }
 
-            if (m_BeingUpdateGroupIndex > m_AvailableGroupIds.Length - 1)
+            if (m_GroupIdsToUpdate.Count == 0)
             {
                 LoadFirstAsset();
                 return;
             }
 
-            int groupId = m_AvailableGroupIds[m_BeingUpdateGroupIndex];
-            var resourceSummary = Asset.ResourceUpdater.GetResourceGroupUpdateSummary(groupId);
-
-            var sb = Core.StringBuilderCache.Acquire();
-            sb.AppendFormat("[DemoAssetApp OnUpdateCheckSuccess] " +
-                            "Resources to update for group '{0}':\n", m_AvailableGroupIds[m_BeingUpdateGroupIndex]);
-
-            foreach (var resourceToUpdate in resourceSummary)
+            foreach (var groupId in m_GroupIdsToUpdate)
             {
-                sb.AppendFormat("{0}: {1} bytes\n", resourceToUpdate.Key, resourceToUpdate.Value);
+                var sb = Core.StringBuilderCache.Acquire();
+                sb.AppendFormat("[DemoAssetApp ContinueUpdateResourceGroupsOrUseAssets] " +
+                                "Resources to update for group '{0}':\n", groupId);
+
+                Asset.ResourceUpdater.StartUpdatingResourceGroup(groupId, new ResourceGroupUpdateCallbackSet
+                {
+                    OnAllFailure = OnUpdateAllResourcesFailure,
+                    OnAllSuccess = OnUpdateAllResourcesSuccess,
+                    OnSingleFailure = OnUpdateResourceFailure,
+                    OnSingleSuccess = OnUpdateResourceSuccess,
+                    OnSingleProgress = OnUpdateResourceProgress,
+                }, groupId);
             }
-
-            Debug.Log(Core.StringBuilderCache.GetStringAndRelease(sb));
-
-            Asset.ResourceUpdater.StartUpdatingResourceGroup(groupId, new ResourceGroupUpdateCallbackSet
-            {
-                OnSingleSuccess = OnUpdateResourceSuccess,
-                OnSingleFailure = OnUpdateResourceFailure,
-                OnSingleProgress = OnUpdateResourceProgress,
-                OnAllSuccess = OnUpdateAllResourcesSuccess,
-                OnAllFailure = OnUpdateAllResourcesFailure,
-            }, "Fake context for resource updating");
-
-            //StartCoroutine(StopAndResume(groupId));
         }
 
         private IEnumerator StopAndResume(int groupId)
@@ -207,7 +216,7 @@ namespace COL.UnityGameWheels.Demo
                 OnSingleProgress = OnUpdateResourceProgress,
                 OnAllSuccess = OnUpdateAllResourcesSuccess,
                 OnAllFailure = OnUpdateAllResourcesFailure,
-            }, "Fake context for resource updating");
+            }, groupId);
             yield break;
         }
 
@@ -235,8 +244,19 @@ namespace COL.UnityGameWheels.Demo
         private void OnUpdateAllResourcesSuccess(object context)
         {
             Debug.LogFormat("[DemoAssetApp OnAllResourcesUpdateSuccess] context='{0}'", context);
-            m_BeingUpdateGroupIndex++;
-            ContinueUpdateResourceGroupsOrUseAssets();
+            var groupId = (int)context;
+            if (groupId == 0)
+            {
+                ContinueUpdateResourceGroupsOrUseAssets();
+            }
+
+            m_GroupIdsToUpdate.Remove(groupId);
+            if (m_GroupIdsToUpdate.Count > 0)
+            {
+                return;
+            }
+
+            LoadFirstAsset();
         }
 
         private void LoadFirstAsset()
