@@ -6,6 +6,10 @@
       <Filter>t:Prefab</Filter>
     </RootDirectoryInfo>
     <RootDirectoryInfo>
+      <DirectoryGuid>5e7111d750837fe4e9af7b360e7d667c</DirectoryGuid>
+      <Filter />
+    </RootDirectoryInfo>
+    <RootDirectoryInfo>
       <DirectoryGuid>c6195a43a0187a34e9c6be23520d3766</DirectoryGuid>
       <Filter>t:Material t:Prefab t:Texture</Filter>
     </RootDirectoryInfo>
@@ -26,6 +30,10 @@
     <AssetInfo>
       <Guid>15135e86e52ab4b038dcbd61d7549e9f</Guid>
       <AssetBundlePath>sa/char/prefabs_another</AssetBundlePath>
+    </AssetInfo>
+    <AssetInfo>
+      <Guid>23f2dcab7a131324d922cfb2bd07db80</Guid>
+      <AssetBundlePath>atlas_test/atlas</AssetBundlePath>
     </AssetInfo>
     <AssetInfo>
       <Guid>27dbec7630294d64c9ab91261656cbd4</Guid>
@@ -60,20 +68,48 @@
       <AssetBundlePath>scene_test/mat</AssetBundlePath>
     </AssetInfo>
     <AssetInfo>
+      <Guid>707b9c54e7ed64c68891a9135a47b848</Guid>
+      <AssetBundlePath>atlas_test/prefab</AssetBundlePath>
+    </AssetInfo>
+    <AssetInfo>
+      <Guid>7931262bee02b4179ab843cecd12cb07</Guid>
+      <AssetBundlePath>atlas_test/atlas</AssetBundlePath>
+    </AssetInfo>
+    <AssetInfo>
       <Guid>794a3489a6afd4daf80d98a5844341b9</Guid>
       <AssetBundlePath>fx/light_cookie</AssetBundlePath>
+    </AssetInfo>
+    <AssetInfo>
+      <Guid>86ce912717672b8429c58e6960c12e25</Guid>
+      <AssetBundlePath>atlas_test/atlas</AssetBundlePath>
     </AssetInfo>
     <AssetInfo>
       <Guid>87a2357765801c34292d6718d8b4d770</Guid>
       <AssetBundlePath>sa/char/prefabs2</AssetBundlePath>
     </AssetInfo>
     <AssetInfo>
+      <Guid>91a6f4c9b969b4bb9866c25cba77273c</Guid>
+      <AssetBundlePath>atlas_test/atlas</AssetBundlePath>
+    </AssetInfo>
+    <AssetInfo>
+      <Guid>9a9871d79d525ab499dd167fd35c46ad</Guid>
+      <AssetBundlePath>atlas_test/atlas</AssetBundlePath>
+    </AssetInfo>
+    <AssetInfo>
       <Guid>a869b219648fd6c47a3c134f3520ccff</Guid>
       <AssetBundlePath>sa/cam/prefabs</AssetBundlePath>
     </AssetInfo>
     <AssetInfo>
+      <Guid>a9c136f9dcfd3954fa0f3fab6260607f</Guid>
+      <AssetBundlePath>atlas_test/atlas</AssetBundlePath>
+    </AssetInfo>
+    <AssetInfo>
       <Guid>ab90c5d984b4d4e9e935ae8760fd47ef</Guid>
       <AssetBundlePath>fx/projector</AssetBundlePath>
+    </AssetInfo>
+    <AssetInfo>
+      <Guid>bc15c6ea9b0124465b164fd3e89c578d</Guid>
+      <AssetBundlePath>atlas_test/atlas</AssetBundlePath>
     </AssetInfo>
     <AssetInfo>
       <Guid>d8cfa4746d26d4715b9f848bce1e2f14</Guid>
@@ -91,8 +127,36 @@
       <Guid>f93df448921b46c45999c77f43856ba2</Guid>
       <AssetBundlePath>sa/char/mat</AssetBundlePath>
     </AssetInfo>
+    <AssetInfo>
+      <Guid>ff84aacc54bb8d843be32e8d39412a39</Guid>
+      <AssetBundlePath>atlas_test/atlas</AssetBundlePath>
+    </AssetInfo>
   </AssetInfos>
   <AssetBundleInfos>
+    <AssetBundleInfo>
+      <AssetBundlePath>atlas_test/atlas</AssetBundlePath>
+      <AssetBundleGroup>0</AssetBundleGroup>
+      <DontPack>false</DontPack>
+      <AssetGuids>
+        <string>acf3fa8bde11c497a962639f8a4aa0ff</string>
+        <string>bc15c6ea9b0124465b164fd3e89c578d</string>
+        <string>7931262bee02b4179ab843cecd12cb07</string>
+        <string>9a9871d79d525ab499dd167fd35c46ad</string>
+        <string>86ce912717672b8429c58e6960c12e25</string>
+        <string>ff84aacc54bb8d843be32e8d39412a39</string>
+        <string>a9c136f9dcfd3954fa0f3fab6260607f</string>
+        <string>23f2dcab7a131324d922cfb2bd07db80</string>
+        <string>91a6f4c9b969b4bb9866c25cba77273c</string>
+      </AssetGuids>
+    </AssetBundleInfo>
+    <AssetBundleInfo>
+      <AssetBundlePath>atlas_test/prefab</AssetBundlePath>
+      <AssetBundleGroup>0</AssetBundleGroup>
+      <DontPack>false</DontPack>
+      <AssetGuids>
+        <string>707b9c54e7ed64c68891a9135a47b848</string>
+      </AssetGuids>
+    </AssetBundleInfo>
     <AssetBundleInfo>
       <AssetBundlePath>fx/glass</AssetBundlePath>
       <AssetBundleGroup>3</AssetBundleGroup>

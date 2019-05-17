@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 namespace COL.UnityGameWheels.Demo
 {
@@ -32,6 +33,17 @@ namespace COL.UnityGameWheels.Demo
         private int[] m_AvailableGroupIds = null;
         private readonly HashSet<int> m_GroupIdsToUpdate = new HashSet<int>();
 
+        [SerializeField]
+        private Image m_Image0 = null;
+
+        [SerializeField]
+        private Image m_Image1 = null;
+
+        [SerializeField]
+        private Image m_Image2 = null;
+
+        [SerializeField]
+        private Image m_Image3 = null;
 
         public static bool IsAvailable
         {
@@ -297,7 +309,34 @@ namespace COL.UnityGameWheels.Demo
             Destroy(go);
             Asset.UnloadAsset(assetAccessor);
             yield return new WaitForSeconds(1);
+            LoadAtlas();
+        }
 
+        private void LoadAtlas()
+        {
+            Asset.LoadAsset("Assets/__MAIN__/Prefabs/DemoAsset/DependOnSprites.prefab", new LoadAssetCallbackSet
+            {
+                OnFailure = null,
+                OnSuccess = OnLoadAtlasSuccess,
+            }, null);
+        }
+
+        private void OnLoadAtlasSuccess(IAssetAccessor assetAccessor, object context)
+        {
+            StartCoroutine(OnLoadAtlasSuccessCo(assetAccessor, context));
+        }
+
+        private IEnumerator OnLoadAtlasSuccessCo(IAssetAccessor assetAccessor, object context)
+        {
+            var prefab = (GameObject)assetAccessor.AssetObject;
+            Instantiate(prefab);
+            yield return new WaitForSeconds(5);
+            Asset.UnloadAsset(assetAccessor);
+            LoadThirdPersonController();
+        }
+
+        private void LoadThirdPersonController()
+        {
             Asset.LoadAsset(
                 "Assets/Standard Assets/Characters/ThirdPersonCharacter/Prefabs/ThirdPersonController.prefab",
                 new LoadAssetCallbackSet
