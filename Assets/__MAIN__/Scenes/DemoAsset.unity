@@ -736,7 +736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af95bf0d4ede5124c9415ae26fe197bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EditorMode: 0
+  m_EditorMode: 1
   m_UpdateStandaloneResourcesInEditor: 0
   m_UpdateIsEnabled: 1
   m_DownloadRetryCount: 2
@@ -861,8 +861,8 @@ MonoBehaviour:
   m_DownloadManager: {fileID: 354579590}
   m_RemoteIndexFileInfo:
     InternalAssetVersion: 1
-    Crc32: 687368216
-    FileSize: 12109
+    Crc32: 3633174710
+    FileSize: 12588
   m_Image0: {fileID: 1137839254}
   m_Image1: {fileID: 117908278}
   m_Image2: {fileID: 243933147}
