@@ -108,6 +108,10 @@
       <AssetBundlePath>fx/projector</AssetBundlePath>
     </AssetInfo>
     <AssetInfo>
+      <Guid>acf3fa8bde11c497a962639f8a4aa0ff</Guid>
+      <AssetBundlePath>atlas_test/atlas</AssetBundlePath>
+    </AssetInfo>
+    <AssetInfo>
       <Guid>bc15c6ea9b0124465b164fd3e89c578d</Guid>
       <AssetBundlePath>atlas_test/atlas</AssetBundlePath>
     </AssetInfo>
@@ -138,7 +142,6 @@
       <AssetBundleGroup>0</AssetBundleGroup>
       <DontPack>false</DontPack>
       <AssetGuids>
-        <string>acf3fa8bde11c497a962639f8a4aa0ff</string>
         <string>bc15c6ea9b0124465b164fd3e89c578d</string>
         <string>7931262bee02b4179ab843cecd12cb07</string>
         <string>9a9871d79d525ab499dd167fd35c46ad</string>
@@ -147,6 +150,7 @@
         <string>a9c136f9dcfd3954fa0f3fab6260607f</string>
         <string>23f2dcab7a131324d922cfb2bd07db80</string>
         <string>91a6f4c9b969b4bb9866c25cba77273c</string>
+        <string>acf3fa8bde11c497a962639f8a4aa0ff</string>
       </AssetGuids>
     </AssetBundleInfo>
     <AssetBundleInfo>
