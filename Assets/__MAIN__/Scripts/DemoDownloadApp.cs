@@ -78,7 +78,7 @@
                     urlStr: m_DownloadInfos[i].UrlStr,
                     savePath: Application.persistentDataPath + Path.DirectorySeparatorChar + m_DownloadInfos[i].SavePath,
                     size: m_DownloadInfos[i].Size,
-                    crc32: m_DownloadInfos[i].CheckCrc32 ? m_DownloadInfos[i].Crc32 : (uint?) null,
+                    crc32: m_DownloadInfos[i].CheckCrc32 ? m_DownloadInfos[i].Crc32 : (uint?)null,
                     callbackSet: new DownloadCallbackSet
                     {
                         OnSuccess = OnDownloadSuccess,
@@ -118,6 +118,16 @@
             if (s_Instance == null)
             {
                 throw new NullReferenceException("App instance is invalid.");
+            }
+        }
+
+        private void OnGUI()
+        {
+            if (GUILayout.Button("Shutdown"))
+            {
+                Download.ShutDown();
+                RefPool.ShutDown();
+                Destroy(gameObject);
             }
         }
 
