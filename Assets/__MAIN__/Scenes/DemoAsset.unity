@@ -861,12 +861,8 @@ MonoBehaviour:
   m_DownloadManager: {fileID: 354579590}
   m_RemoteIndexFileInfo:
     InternalAssetVersion: 1
-    Crc32: 709515956
-    FileSize: 13457
-  m_Image0: {fileID: 1137839254}
-  m_Image1: {fileID: 117908278}
-  m_Image2: {fileID: 243933147}
-  m_Image3: {fileID: 1768245878}
+    Crc32: 1360313666
+    FileSize: 12369
 --- !u!4 &1830306777
 Transform:
   m_ObjectHideFlags: 0

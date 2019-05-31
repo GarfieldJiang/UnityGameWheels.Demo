@@ -33,18 +33,6 @@ namespace COL.UnityGameWheels.Demo
         private int[] m_AvailableGroupIds = null;
         private readonly HashSet<int> m_GroupIdsToUpdate = new HashSet<int>();
 
-        [SerializeField]
-        private Image m_Image0 = null;
-
-        [SerializeField]
-        private Image m_Image1 = null;
-
-        [SerializeField]
-        private Image m_Image2 = null;
-
-        [SerializeField]
-        private Image m_Image3 = null;
-
         public static bool IsAvailable
         {
             get { return s_Instance != null; }

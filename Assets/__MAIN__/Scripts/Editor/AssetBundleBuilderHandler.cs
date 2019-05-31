@@ -17,14 +17,16 @@ namespace COL.UnityGameWheels.Demo.Editor
             Debug.Log($"[{nameof(AssetBundleBuilderHandler)} {nameof(OnPostBeforeBuild)}] assetBundleBuilds.Length={assetBundleBuilds.Length}");
         }
 
-        public void OnPreBuildPlatform(ResourcePlatform targetPlatform)
+        public void OnPreBuildPlatform(ResourcePlatform targetPlatform, int internalResourceVersion)
         {
-            Debug.Log($"[{nameof(AssetBundleBuilderHandler)} {nameof(OnPreBuildPlatform)}] targetPlatform={targetPlatform}");
+            Debug.Log($"[{nameof(AssetBundleBuilderHandler)} {nameof(OnPreBuildPlatform)}] targetPlatform={targetPlatform}, " +
+                      $"internalResourceVersion={internalResourceVersion}");
         }
 
-        public void OnPostBuildPlatform(ResourcePlatform targetPlatform, string outputDirectory)
+        public void OnPostBuildPlatform(ResourcePlatform targetPlatform, int internalResourceVersion, string outputDirectory)
         {
-            Debug.Log($"[{nameof(AssetBundleBuilderHandler)} {nameof(OnPostBuildPlatform)}] targetPlatform={targetPlatform}, outputDirectory={outputDirectory}");
+            Debug.Log($"[{nameof(AssetBundleBuilderHandler)} {nameof(OnPostBuildPlatform)}] targetPlatform={targetPlatform}, " +
+                      $"internalResourceVersion={internalResourceVersion}, outputDirectory={outputDirectory}");
         }
 
         public void OnBuildSuccess()
