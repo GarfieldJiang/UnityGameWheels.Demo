@@ -863,6 +863,7 @@ MonoBehaviour:
     InternalAssetVersion: 1
     Crc32: 1360313666
     FileSize: 12369
+  m_UpdateCheckerRetryTimes: 2
 --- !u!4 &1830306777
 Transform:
   m_ObjectHideFlags: 0

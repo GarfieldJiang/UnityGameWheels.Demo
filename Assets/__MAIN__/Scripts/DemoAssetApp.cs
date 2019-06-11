@@ -30,6 +30,9 @@ namespace COL.UnityGameWheels.Demo
         [SerializeField]
         private RemoteIndexFileInfo m_RemoteIndexFileInfo = null;
 
+        [SerializeField]
+        private int m_UpdateCheckerRetryTimes = 2;
+
         private int[] m_AvailableGroupIds = null;
         private readonly HashSet<int> m_GroupIdsToUpdate = new HashSet<int>();
 
@@ -139,8 +142,20 @@ namespace COL.UnityGameWheels.Demo
 
         private void OnUpdateCheckFailure(string errorMessage, object context)
         {
+            if (m_UpdateCheckerRetryTimes-- <= 0)
+            {
+                Debug.LogErrorFormat("[DemoAssetApp OnUpdateCheckFailure] errorMessage='{0}', context='{1}'.",
+                    errorMessage, context);
+                return;
+            }
+
             Debug.LogWarningFormat("[DemoAssetApp OnUpdateCheckFailure] errorMessage='{0}', context='{1}'.",
                 errorMessage, context);
+            Asset.CheckUpdate((AssetIndexRemoteFileInfo)m_RemoteIndexFileInfo, new UpdateCheckCallbackSet
+            {
+                OnFailure = OnUpdateCheckFailure,
+                OnSuccess = OnUpdateCheckSuccess,
+            }, "Fake context for update checking");
         }
 
         private void OnUpdateCheckSuccess(object context)
