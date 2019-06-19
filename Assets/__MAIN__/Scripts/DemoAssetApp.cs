@@ -281,6 +281,7 @@ namespace COL.UnityGameWheels.Demo
                 {
                     OnFailure = OnLoadAssetFailure,
                     OnSuccess = OnLoadAssetSuccess,
+                    OnProgress = OnLoadAssetProgress,
                 }, "Fake load asset context");
         }
 
@@ -321,6 +322,7 @@ namespace COL.UnityGameWheels.Demo
             {
                 OnFailure = null,
                 OnSuccess = OnLoadAtlasSuccess,
+                OnProgress = OnLoadAssetProgress,
             }, null);
         }
 
@@ -346,6 +348,7 @@ namespace COL.UnityGameWheels.Demo
                 {
                     OnSuccess = OnLoadTPCSuccess,
                     OnFailure = OnLoadAssetFailure,
+                    OnProgress = OnLoadAssetProgress,
                 }, null);
         }
 
@@ -354,6 +357,7 @@ namespace COL.UnityGameWheels.Demo
             Asset.LoadAsset("Assets/Standard Assets/2D/Prefabs/CharacterRobotBoy.prefab", new LoadAssetCallbackSet
             {
                 OnSuccess = OnLoadCRBSuccess,
+                OnProgress = OnLoadAssetProgress,
                 OnFailure = OnLoadAssetFailure,
             }, assetAccessor);
         }
@@ -376,6 +380,7 @@ namespace COL.UnityGameWheels.Demo
                 new LoadAssetCallbackSet
                 {
                     OnSuccess = OnLoadTPCSuccessAgain,
+                    OnProgress = OnLoadAssetProgress,
                     OnFailure = OnLoadAssetFailure,
                 }, crb);
         }
@@ -395,6 +400,7 @@ namespace COL.UnityGameWheels.Demo
             {
                 OnSuccess = OnLoadPrefabADependsOnBSuccess,
                 OnFailure = OnLoadAssetFailure,
+                OnProgress = OnLoadAssetProgress,
             }, null);
         }
 
@@ -411,6 +417,16 @@ namespace COL.UnityGameWheels.Demo
             Asset.UnloadAsset(assetAccessor);
             yield return new WaitForSeconds(2f);
 
+            Asset.LoadAsset("Assets/__MAIN__/Prefabs/DemoAsset/get-pip.txt", new LoadAssetCallbackSet
+            {
+                OnSuccess = (_assetAccessor, _context) => { LoadAnotherScene(); },
+                OnFailure = OnLoadAssetFailure,
+                OnProgress = OnLoadAssetProgress,
+            }, null);
+        }
+
+        private void LoadAnotherScene()
+        {
             Asset.LoadSceneAsset("Assets/Standard Assets/Effects/TessellationShaders/Scenes/TessellationSample.unity",
                 new LoadAssetCallbackSet
                 {
@@ -419,7 +435,8 @@ namespace COL.UnityGameWheels.Demo
                     {
                         StartCoroutine(AfterLoadScene(_assetAccessor,
                             SceneManager.LoadSceneAsync("TessellationSample", LoadSceneMode.Single)));
-                    }
+                    },
+                    OnProgress = OnLoadAssetProgress,
                 }, null);
         }
 
@@ -428,6 +445,11 @@ namespace COL.UnityGameWheels.Demo
             yield return loadSceneOp;
             yield return new WaitForSeconds(3);
             Asset.UnloadAsset(sceneAssetAccessor);
+        }
+
+        private void OnLoadAssetProgress(IAssetAccessor assetAccessor, float progress, object context)
+        {
+            Debug.Log($"[DemoAssetApp OnLoadAssetProgress] assetPath: {assetAccessor.AssetPath}, progress: {progress}");
         }
 
         [Serializable]
