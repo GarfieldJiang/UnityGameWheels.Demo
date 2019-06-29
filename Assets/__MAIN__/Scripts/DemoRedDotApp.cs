@@ -1,20 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using COL.UnityGameWheels.Core.RedDot;
+﻿using COL.UnityGameWheels.Core.RedDot;
 using COL.UnityGameWheels.Unity.RedDot;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
+using System;
+using COL.UnityGameWheels.Unity;
+using UnityEngine;
 
 namespace COL.UnityGameWheels.Demo
 {
-    using Core.Asset;
-    using System;
-    using System.Collections;
-    using Unity;
-    using Unity.Asset;
-    using UnityEngine;
-    using UnityEngine.SceneManagement;
-
     [DisallowMultipleComponent]
     public class DemoRedDotApp : MonoBehaviourEx
     {
@@ -70,6 +62,18 @@ namespace COL.UnityGameWheels.Demo
             }
 
             m_RedDotManager.SetUp();
+
+            foreach (var leaf in m_LeafConfigs)
+            {
+                var text = GameObject.Find(leaf).GetComponent<Text>();
+                RedDotManager.AddObserver(leaf, new RedDotObserver {TextWidget = text, OriginalText = text.text});
+            }
+
+            foreach (var nonLeaf in m_NonLeafConfigs)
+            {
+                var text = GameObject.Find(nonLeaf.Key).GetComponent<Text>();gi
+                RedDotManager.AddObserver(nonLeaf.Key, new RedDotObserver {TextWidget = text, OriginalText = text.text});
+            }
         }
 
         private static void CheckInstanceOrThrow()
@@ -86,6 +90,17 @@ namespace COL.UnityGameWheels.Demo
             public string Key;
             public NonLeafOperation Operation;
             public string[] DependsOn;
+        }
+
+        private class RedDotObserver : IRedDotObserver
+        {
+            public string OriginalText;
+            public Text TextWidget;
+
+            public void OnChange(string key, int value)
+            {
+                TextWidget.text = OriginalText + " " + value;
+            }
         }
     }
 }
