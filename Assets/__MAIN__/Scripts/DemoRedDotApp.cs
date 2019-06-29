@@ -87,15 +87,15 @@ namespace COL.UnityGameWheels.Demo
         [Serializable]
         private class RedDotNonLeafConfig
         {
-            public string Key;
-            public NonLeafOperation Operation;
-            public string[] DependsOn;
+            public string Key = null;
+            public NonLeafOperation Operation = NonLeafOperation.Sum;
+            public string[] DependsOn = null;
         }
 
         private class RedDotObserver : IRedDotObserver
         {
-            public string OriginalText;
-            public Text TextWidget;
+            public string OriginalText = null;
+            public Text TextWidget = null;
 
             public void OnChange(string key, int value)
             {
