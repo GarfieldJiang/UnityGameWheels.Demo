@@ -71,7 +71,7 @@ namespace COL.UnityGameWheels.Demo
 
             foreach (var nonLeaf in m_NonLeafConfigs)
             {
-                var text = GameObject.Find(nonLeaf.Key).GetComponent<Text>();gi
+                var text = GameObject.Find(nonLeaf.Key).GetComponent<Text>();
                 RedDotManager.AddObserver(nonLeaf.Key, new RedDotObserver {TextWidget = text, OriginalText = text.text});
             }
         }
