@@ -53,15 +53,15 @@ namespace COL.UnityGameWheels.Demo
         {
             foreach (var nonLeaf in m_NonLeafConfigs)
             {
-                m_RedDotManager.AddNonLeaf(nonLeaf.Key, nonLeaf.Operation, nonLeaf.DependsOn);
+                RedDotManager.AddNonLeaf(nonLeaf.Key, nonLeaf.Operation, nonLeaf.DependsOn);
             }
 
             foreach (var leaf in m_LeafConfigs)
             {
-                m_RedDotManager.AddLeaf(leaf);
+                RedDotManager.AddLeaf(leaf);
             }
 
-            m_RedDotManager.SetUp();
+            RedDotManager.SetUp();
 
             foreach (var leaf in m_LeafConfigs)
             {
