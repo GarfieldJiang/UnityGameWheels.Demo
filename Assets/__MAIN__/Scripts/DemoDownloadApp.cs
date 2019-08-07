@@ -58,6 +58,8 @@
             base.Awake();
             DontDestroyOnLoad(gameObject);
             s_Instance = this;
+            
+            Log.SetLogger(new LoggerImpl());
         }
 
         private void Start()
@@ -109,6 +111,8 @@
 
         protected override void OnDestroy()
         {
+            Download.ShutDown();
+            RefPool.ShutDown();
             s_Instance = null;
             base.OnDestroy();
         }
@@ -125,8 +129,6 @@
         {
             if (GUILayout.Button("Shutdown"))
             {
-                Download.ShutDown();
-                RefPool.ShutDown();
                 Destroy(gameObject);
             }
         }

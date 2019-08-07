@@ -201,7 +201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TempFileExtension: .tmp
   m_ConcurrentDownloadCountLimit: 2
-  m_ChunkSizeToSave: 65536
+  m_ChunkSizeToSave: 131072
   m_Timeout: 0
 --- !u!1 &527854044
 GameObject:
@@ -335,15 +335,15 @@ MonoBehaviour:
   m_RefPoolManager: {fileID: 330741596}
   m_DownloadManager: {fileID: 354579590}
   m_DownloadInfos:
-  - SavePath: 16MB
+  - SavePath: 1MB_1
     CheckCrc32: 0
     IsActive: 1
-    Crc32: 0
-    UrlStr: http://mirror.filearena.net/pub/speed/SpeedTest_16MB.dat?_ga=2.180739047.1514903800.1509772974-1447818325.1509772974
-    Size: 16777216
+    Crc32: 2805525020
+    UrlStr: http://mirror.filearena.net/pub/speed/SpeedTest_1MB
+    Size: 1048576
   - SavePath: 32MB
     CheckCrc32: 0
-    IsActive: 0
+    IsActive: 1
     Crc32: 0
     UrlStr: http://mirror.filearena.net/pub/speed/SpeedTest_32MB.dat?_ga=2.180739047.1514903800.1509772974-1447818325.1509772974
     Size: 33554432
@@ -359,7 +359,7 @@ MonoBehaviour:
     Crc32: 0
     UrlStr: http://mirror.filearena.net/pub/speed/SpeedTest_128MB.dat?_ga=2.207478611.1514903800.1509772974-1447818325.1509772974
     Size: 134217728
-  - SavePath: 1MB
+  - SavePath: 1MB_2
     CheckCrc32: 1
     IsActive: 1
     Crc32: 2805525020
