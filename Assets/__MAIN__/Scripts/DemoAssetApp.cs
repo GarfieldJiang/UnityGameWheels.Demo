@@ -161,18 +161,22 @@ namespace COL.UnityGameWheels.Demo
         private void OnUpdateCheckSuccess(object context)
         {
             Debug.LogFormat("[DemoAssetApp OnUpdateCheckSuccess] context='{0}'.", context);
+            string checkGroupAssetPath = "Assets/Standard Assets/Characters/RollerBall/Prefabs/RollerBall.prefab";
+            Debug.LogFormat("[DemoAssetApp OnUpdateCheckSucces] Group ID of asset '{0}' is {1}.",
+                checkGroupAssetPath,
+                Asset.GetAssetResourceGroupId(checkGroupAssetPath));
             UpdateCommonGroup();
         }
 
         private void UpdateCommonGroup()
         {
-            if (Asset.ResourceUpdater.GetResourceGroupStatus(0) == ResourceGroupStatus.UpToDate)
+            if (Asset.ResourceUpdater.GetResourceGroupStatus(Core.Asset.Constant.CommonResourceGroupId) == ResourceGroupStatus.UpToDate)
             {
                 ContinueUpdateResourceGroupsOrUseAssets();
                 return;
             }
 
-            Asset.ResourceUpdater.StartUpdatingResourceGroup(0, new ResourceGroupUpdateCallbackSet
+            Asset.ResourceUpdater.StartUpdatingResourceGroup(Core.Asset.Constant.CommonResourceGroupId, new ResourceGroupUpdateCallbackSet
             {
                 OnAllFailure = OnUpdateAllResourcesFailure,
                 OnAllSuccess = OnUpdateAllResourcesSuccess,
@@ -260,7 +264,7 @@ namespace COL.UnityGameWheels.Demo
         {
             Debug.LogFormat("[DemoAssetApp OnAllResourcesUpdateSuccess] context='{0}'", context);
             var groupId = (int)context;
-            if (groupId == 0)
+            if (groupId == Core.Asset.Constant.CommonResourceGroupId)
             {
                 ContinueUpdateResourceGroupsOrUseAssets();
             }
