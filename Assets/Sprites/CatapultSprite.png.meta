@@ -1,11 +1,15 @@
 fileFormatVersion: 2
 guid: 555975464417842748951a085f3cf3ba
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: CatapultSprite_0
-    21300002: CatapultSprite_1
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: CatapultSprite_0
+  - first:
+      213: 21300002
+    second: CatapultSprite_1
   externalObjects: {}
-  serializedVersion: 9
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -59,8 +63,9 @@ TextureImporter:
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  applyGammaDecoding: 1
   platformSettings:
-  - serializedVersion: 2
+  - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 1024
     resizeAlgorithm: 0
@@ -71,6 +76,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -90,6 +96,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 19eb02717d301462cb6a0c6812d713c5
+      internalID: 21300000
       vertices: []
       indices: 
       edges: []
@@ -110,6 +117,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 31a0b382eec824fbeaae41b896e00619
+      internalID: 21300002
       vertices: []
       indices: 
       edges: []
@@ -118,10 +126,12 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
+    secondaryTextures: []
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

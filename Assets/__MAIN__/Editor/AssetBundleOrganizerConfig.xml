@@ -2,298 +2,130 @@
 <AssetBundleOrganizerConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <RootDirectoryInfos>
     <RootDirectoryInfo>
-      <DirectoryGuid>fe32a7ce218dc4cb0969c8c23164426e</DirectoryGuid>
-      <Filter>t:Prefab t:textasset</Filter>
+      <DirectoryGuid>f83dd6d30187d4a4fa107caa36e267a1</DirectoryGuid>
+      <Filter>t:prefab t:textasset</Filter>
+    </RootDirectoryInfo>
+    <RootDirectoryInfo>
+      <DirectoryGuid>fca484a638c989e4d899378f52d7c168</DirectoryGuid>
+      <Filter>t:texture t:material t:model t:prefab t:anim t:scene</Filter>
     </RootDirectoryInfo>
     <RootDirectoryInfo>
       <DirectoryGuid>5e7111d750837fe4e9af7b360e7d667c</DirectoryGuid>
-      <Filter />
-    </RootDirectoryInfo>
-    <RootDirectoryInfo>
-      <DirectoryGuid>c6195a43a0187a34e9c6be23520d3766</DirectoryGuid>
-      <Filter>t:Material t:Prefab t:Texture</Filter>
-    </RootDirectoryInfo>
-    <RootDirectoryInfo>
-      <DirectoryGuid>1553d77f542284c478caca3b413d7c6a</DirectoryGuid>
-      <Filter>t:Scene</Filter>
+      <Filter>t:texture</Filter>
     </RootDirectoryInfo>
   </RootDirectoryInfos>
   <AssetInfos>
     <AssetInfo>
-      <Guid>08cf2fc601fa9a2408b6a1efae3f2a01</Guid>
-      <AssetBundlePath>scene_test/tex</AssetBundlePath>
-    </AssetInfo>
-    <AssetInfo>
       <Guid>0a2c28bb69bf94322978fc03927d55e4</Guid>
-      <AssetBundlePath>prefab_ab_cycle/1</AssetBundlePath>
+      <AssetBundlePath>dep/1</AssetBundlePath>
     </AssetInfo>
     <AssetInfo>
-      <Guid>15135e86e52ab4b038dcbd61d7549e9f</Guid>
-      <AssetBundlePath>sa/char/prefabs_another</AssetBundlePath>
+      <Guid>4032d8f8d13c5954f956f116443aacff</Guid>
+      <AssetBundlePath>bayat/bg</AssetBundlePath>
     </AssetInfo>
     <AssetInfo>
-      <Guid>23f2dcab7a131324d922cfb2bd07db80</Guid>
-      <AssetBundlePath>atlas_test/atlas</AssetBundlePath>
+      <Guid>55d7f2332d2f0c841856191e36860e84</Guid>
+      <AssetBundlePath>bayat/coin</AssetBundlePath>
     </AssetInfo>
     <AssetInfo>
-      <Guid>27dbec7630294d64c9ab91261656cbd4</Guid>
-      <AssetBundlePath>sa/2d</AssetBundlePath>
-    </AssetInfo>
-    <AssetInfo>
-      <Guid>31f6763de0920574092c8a69a66c717e</Guid>
-      <AssetBundlePath>scene_test/scenes</AssetBundlePath>
-    </AssetInfo>
-    <AssetInfo>
-      <Guid>3c788335fe2df44ca9bbf95bc580ce4d</Guid>
-      <AssetBundlePath>fx/glass</AssetBundlePath>
-    </AssetInfo>
-    <AssetInfo>
-      <Guid>41db8cbfecdbdb54ab2bac971c05547a</Guid>
-      <AssetBundlePath>sa/char/mat</AssetBundlePath>
-    </AssetInfo>
-    <AssetInfo>
-      <Guid>5d2f1a0944eff024ab396500807b91cd</Guid>
-      <AssetBundlePath>sa/char/prefabs2</AssetBundlePath>
+      <Guid>5e7111d750837fe4e9af7b360e7d667c</Guid>
+      <AssetBundlePath>sprites</AssetBundlePath>
     </AssetInfo>
     <AssetInfo>
       <Guid>6627b2d3470cb4407b4a279d92603c3c</Guid>
-      <AssetBundlePath>prefab_ab_cycle/2</AssetBundlePath>
+      <AssetBundlePath>dep/2</AssetBundlePath>
     </AssetInfo>
     <AssetInfo>
       <Guid>66aef1070a1c547aebe1d38948780b6e</Guid>
-      <AssetBundlePath>prefab_ab_cycle/1</AssetBundlePath>
-    </AssetInfo>
-    <AssetInfo>
-      <Guid>6deddaccf56ed5f47806946aed94d2c9</Guid>
-      <AssetBundlePath>scene_test/mat</AssetBundlePath>
+      <AssetBundlePath>dep/1</AssetBundlePath>
     </AssetInfo>
     <AssetInfo>
       <Guid>707b9c54e7ed64c68891a9135a47b848</Guid>
-      <AssetBundlePath>atlas_test/prefab</AssetBundlePath>
+      <AssetBundlePath>dep/1</AssetBundlePath>
     </AssetInfo>
     <AssetInfo>
       <Guid>78f944056d0a7440596692d3883ac65f</Guid>
-      <AssetBundlePath>big</AssetBundlePath>
+      <AssetBundlePath>big_text</AssetBundlePath>
     </AssetInfo>
     <AssetInfo>
-      <Guid>7931262bee02b4179ab843cecd12cb07</Guid>
-      <AssetBundlePath>atlas_test/atlas</AssetBundlePath>
-    </AssetInfo>
-    <AssetInfo>
-      <Guid>794a3489a6afd4daf80d98a5844341b9</Guid>
-      <AssetBundlePath>fx/light_cookie</AssetBundlePath>
-    </AssetInfo>
-    <AssetInfo>
-      <Guid>86ce912717672b8429c58e6960c12e25</Guid>
-      <AssetBundlePath>atlas_test/atlas</AssetBundlePath>
-    </AssetInfo>
-    <AssetInfo>
-      <Guid>87a2357765801c34292d6718d8b4d770</Guid>
-      <AssetBundlePath>sa/char/prefabs2</AssetBundlePath>
-    </AssetInfo>
-    <AssetInfo>
-      <Guid>91a6f4c9b969b4bb9866c25cba77273c</Guid>
-      <AssetBundlePath>atlas_test/atlas</AssetBundlePath>
-    </AssetInfo>
-    <AssetInfo>
-      <Guid>9a9871d79d525ab499dd167fd35c46ad</Guid>
-      <AssetBundlePath>atlas_test/atlas</AssetBundlePath>
-    </AssetInfo>
-    <AssetInfo>
-      <Guid>a869b219648fd6c47a3c134f3520ccff</Guid>
-      <AssetBundlePath>sa/cam/prefabs</AssetBundlePath>
-    </AssetInfo>
-    <AssetInfo>
-      <Guid>a9c136f9dcfd3954fa0f3fab6260607f</Guid>
-      <AssetBundlePath>atlas_test/atlas</AssetBundlePath>
-    </AssetInfo>
-    <AssetInfo>
-      <Guid>ab90c5d984b4d4e9e935ae8760fd47ef</Guid>
-      <AssetBundlePath>fx/projector</AssetBundlePath>
-    </AssetInfo>
-    <AssetInfo>
-      <Guid>acf3fa8bde11c497a962639f8a4aa0ff</Guid>
-      <AssetBundlePath>atlas_test/atlas</AssetBundlePath>
-    </AssetInfo>
-    <AssetInfo>
-      <Guid>bc15c6ea9b0124465b164fd3e89c578d</Guid>
-      <AssetBundlePath>atlas_test/atlas</AssetBundlePath>
-    </AssetInfo>
-    <AssetInfo>
-      <Guid>d8cfa4746d26d4715b9f848bce1e2f14</Guid>
-      <AssetBundlePath>fx/light_flare</AssetBundlePath>
-    </AssetInfo>
-    <AssetInfo>
-      <Guid>e09f07f9be24b2d4180a74a671348b5b</Guid>
-      <AssetBundlePath>sa/char/prefabs2</AssetBundlePath>
+      <Guid>c141d24673958bb44b780d361745cca7</Guid>
+      <AssetBundlePath>bayat/demo_scene</AssetBundlePath>
     </AssetInfo>
     <AssetInfo>
       <Guid>f0f3abb56e3f8463f9f6b845705e26df</Guid>
-      <AssetBundlePath>prefab_ab_cycle/2</AssetBundlePath>
-    </AssetInfo>
-    <AssetInfo>
-      <Guid>f93df448921b46c45999c77f43856ba2</Guid>
-      <AssetBundlePath>sa/char/mat</AssetBundlePath>
-    </AssetInfo>
-    <AssetInfo>
-      <Guid>ff84aacc54bb8d843be32e8d39412a39</Guid>
-      <AssetBundlePath>atlas_test/atlas</AssetBundlePath>
+      <AssetBundlePath>dep/2</AssetBundlePath>
     </AssetInfo>
   </AssetInfos>
   <AssetBundleInfos>
     <AssetBundleInfo>
-      <AssetBundlePath>atlas_test/atlas</AssetBundlePath>
-      <AssetBundleGroup>0</AssetBundleGroup>
-      <DontPack>false</DontPack>
+      <AssetBundlePath>bayat/bg</AssetBundlePath>
+      <AssetBundleGroup>1</AssetBundleGroup>
+      <DontPack>true</DontPack>
       <AssetGuids>
-        <string>bc15c6ea9b0124465b164fd3e89c578d</string>
-        <string>7931262bee02b4179ab843cecd12cb07</string>
-        <string>9a9871d79d525ab499dd167fd35c46ad</string>
-        <string>86ce912717672b8429c58e6960c12e25</string>
-        <string>ff84aacc54bb8d843be32e8d39412a39</string>
-        <string>a9c136f9dcfd3954fa0f3fab6260607f</string>
-        <string>23f2dcab7a131324d922cfb2bd07db80</string>
-        <string>91a6f4c9b969b4bb9866c25cba77273c</string>
-        <string>acf3fa8bde11c497a962639f8a4aa0ff</string>
+        <string>4032d8f8d13c5954f956f116443aacff</string>
       </AssetGuids>
     </AssetBundleInfo>
     <AssetBundleInfo>
-      <AssetBundlePath>atlas_test/prefab</AssetBundlePath>
-      <AssetBundleGroup>0</AssetBundleGroup>
+      <AssetBundlePath>bayat/char/anim</AssetBundlePath>
+      <AssetBundleGroup>1</AssetBundleGroup>
       <DontPack>false</DontPack>
+      <AssetGuids />
+    </AssetBundleInfo>
+    <AssetBundleInfo>
+      <AssetBundlePath>bayat/char/source</AssetBundlePath>
+      <AssetBundleGroup>1</AssetBundleGroup>
+      <DontPack>false</DontPack>
+      <AssetGuids />
+    </AssetBundleInfo>
+    <AssetBundleInfo>
+      <AssetBundlePath>bayat/coin</AssetBundlePath>
+      <AssetBundleGroup>1</AssetBundleGroup>
+      <DontPack>true</DontPack>
       <AssetGuids>
-        <string>707b9c54e7ed64c68891a9135a47b848</string>
+        <string>55d7f2332d2f0c841856191e36860e84</string>
       </AssetGuids>
     </AssetBundleInfo>
     <AssetBundleInfo>
-      <AssetBundlePath>big</AssetBundlePath>
-      <AssetBundleGroup>0</AssetBundleGroup>
+      <AssetBundlePath>bayat/demo_scene</AssetBundlePath>
+      <AssetBundleGroup>1</AssetBundleGroup>
       <DontPack>false</DontPack>
+      <AssetGuids>
+        <string>c141d24673958bb44b780d361745cca7</string>
+      </AssetGuids>
+    </AssetBundleInfo>
+    <AssetBundleInfo>
+      <AssetBundlePath>big_text</AssetBundlePath>
+      <AssetBundleGroup>1</AssetBundleGroup>
+      <DontPack>true</DontPack>
       <AssetGuids>
         <string>78f944056d0a7440596692d3883ac65f</string>
       </AssetGuids>
     </AssetBundleInfo>
     <AssetBundleInfo>
-      <AssetBundlePath>fx/glass</AssetBundlePath>
-      <AssetBundleGroup>3</AssetBundleGroup>
-      <DontPack>true</DontPack>
-      <AssetGuids>
-        <string>3c788335fe2df44ca9bbf95bc580ce4d</string>
-      </AssetGuids>
-    </AssetBundleInfo>
-    <AssetBundleInfo>
-      <AssetBundlePath>fx/light_cookie</AssetBundlePath>
-      <AssetBundleGroup>3</AssetBundleGroup>
-      <DontPack>true</DontPack>
-      <AssetGuids>
-        <string>794a3489a6afd4daf80d98a5844341b9</string>
-      </AssetGuids>
-    </AssetBundleInfo>
-    <AssetBundleInfo>
-      <AssetBundlePath>fx/light_flare</AssetBundlePath>
-      <AssetBundleGroup>3</AssetBundleGroup>
-      <DontPack>true</DontPack>
-      <AssetGuids>
-        <string>d8cfa4746d26d4715b9f848bce1e2f14</string>
-      </AssetGuids>
-    </AssetBundleInfo>
-    <AssetBundleInfo>
-      <AssetBundlePath>fx/projector</AssetBundlePath>
-      <AssetBundleGroup>3</AssetBundleGroup>
-      <DontPack>true</DontPack>
-      <AssetGuids>
-        <string>ab90c5d984b4d4e9e935ae8760fd47ef</string>
-      </AssetGuids>
-    </AssetBundleInfo>
-    <AssetBundleInfo>
-      <AssetBundlePath>prefab_ab_cycle/1</AssetBundlePath>
-      <AssetBundleGroup>0</AssetBundleGroup>
-      <DontPack>true</DontPack>
-      <AssetGuids>
-        <string>0a2c28bb69bf94322978fc03927d55e4</string>
-        <string>66aef1070a1c547aebe1d38948780b6e</string>
-      </AssetGuids>
-    </AssetBundleInfo>
-    <AssetBundleInfo>
-      <AssetBundlePath>prefab_ab_cycle/2</AssetBundlePath>
-      <AssetBundleGroup>0</AssetBundleGroup>
+      <AssetBundlePath>dep/1</AssetBundlePath>
+      <AssetBundleGroup>1</AssetBundleGroup>
       <DontPack>false</DontPack>
+      <AssetGuids>
+        <string>707b9c54e7ed64c68891a9135a47b848</string>
+        <string>66aef1070a1c547aebe1d38948780b6e</string>
+        <string>0a2c28bb69bf94322978fc03927d55e4</string>
+      </AssetGuids>
+    </AssetBundleInfo>
+    <AssetBundleInfo>
+      <AssetBundlePath>dep/2</AssetBundlePath>
+      <AssetBundleGroup>1</AssetBundleGroup>
+      <DontPack>true</DontPack>
       <AssetGuids>
         <string>f0f3abb56e3f8463f9f6b845705e26df</string>
         <string>6627b2d3470cb4407b4a279d92603c3c</string>
       </AssetGuids>
     </AssetBundleInfo>
     <AssetBundleInfo>
-      <AssetBundlePath>sa/2d</AssetBundlePath>
+      <AssetBundlePath>sprites</AssetBundlePath>
       <AssetBundleGroup>0</AssetBundleGroup>
       <DontPack>false</DontPack>
       <AssetGuids>
-        <string>27dbec7630294d64c9ab91261656cbd4</string>
-      </AssetGuids>
-    </AssetBundleInfo>
-    <AssetBundleInfo>
-      <AssetBundlePath>sa/cam/prefabs</AssetBundlePath>
-      <AssetBundleGroup>1</AssetBundleGroup>
-      <DontPack>true</DontPack>
-      <AssetGuids>
-        <string>a869b219648fd6c47a3c134f3520ccff</string>
-      </AssetGuids>
-    </AssetBundleInfo>
-    <AssetBundleInfo>
-      <AssetBundlePath>sa/char/mat</AssetBundlePath>
-      <AssetBundleGroup>0</AssetBundleGroup>
-      <DontPack>false</DontPack>
-      <AssetGuids>
-        <string>41db8cbfecdbdb54ab2bac971c05547a</string>
-        <string>f93df448921b46c45999c77f43856ba2</string>
-      </AssetGuids>
-    </AssetBundleInfo>
-    <AssetBundleInfo>
-      <AssetBundlePath>sa/char/prefabs_another</AssetBundlePath>
-      <AssetBundleGroup>2</AssetBundleGroup>
-      <DontPack>true</DontPack>
-      <AssetGuids>
-        <string>15135e86e52ab4b038dcbd61d7549e9f</string>
-      </AssetGuids>
-    </AssetBundleInfo>
-    <AssetBundleInfo>
-      <AssetBundlePath>sa/char/prefabs2</AssetBundlePath>
-      <AssetBundleGroup>1</AssetBundleGroup>
-      <DontPack>true</DontPack>
-      <AssetGuids>
-        <string>87a2357765801c34292d6718d8b4d770</string>
-        <string>e09f07f9be24b2d4180a74a671348b5b</string>
-        <string>5d2f1a0944eff024ab396500807b91cd</string>
-      </AssetGuids>
-    </AssetBundleInfo>
-    <AssetBundleInfo>
-      <AssetBundlePath>sa/char/tex</AssetBundlePath>
-      <AssetBundleGroup>0</AssetBundleGroup>
-      <DontPack>false</DontPack>
-      <AssetGuids />
-    </AssetBundleInfo>
-    <AssetBundleInfo>
-      <AssetBundlePath>scene_test/mat</AssetBundlePath>
-      <AssetBundleGroup>0</AssetBundleGroup>
-      <DontPack>false</DontPack>
-      <AssetGuids>
-        <string>6deddaccf56ed5f47806946aed94d2c9</string>
-      </AssetGuids>
-    </AssetBundleInfo>
-    <AssetBundleInfo>
-      <AssetBundlePath>scene_test/scenes</AssetBundlePath>
-      <AssetBundleGroup>1</AssetBundleGroup>
-      <DontPack>false</DontPack>
-      <AssetGuids>
-        <string>31f6763de0920574092c8a69a66c717e</string>
-      </AssetGuids>
-    </AssetBundleInfo>
-    <AssetBundleInfo>
-      <AssetBundlePath>scene_test/tex</AssetBundlePath>
-      <AssetBundleGroup>0</AssetBundleGroup>
-      <DontPack>false</DontPack>
-      <AssetGuids>
-        <string>08cf2fc601fa9a2408b6a1efae3f2a01</string>
+        <string>5e7111d750837fe4e9af7b360e7d667c</string>
       </AssetGuids>
     </AssetBundleInfo>
   </AssetBundleInfos>

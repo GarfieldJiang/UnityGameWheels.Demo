@@ -33,6 +33,21 @@ namespace COL.UnityGameWheels.Demo
         [SerializeField]
         private int m_UpdateCheckerRetryTimes = 2;
 
+        [SerializeField]
+        private string m_CheckGroupAssetPath = null;
+
+        [SerializeField]
+        private string m_DepOnSpritePrefabPath = null;
+
+        [SerializeField]
+        private string m_PrefabADependsOnBPath = null;
+
+        [SerializeField]
+        private string m_GetPipTextPath = null;
+
+        [SerializeField]
+        private string m_SceneAssetPath = null;
+
         private int[] m_AvailableGroupIds = null;
         private readonly HashSet<int> m_GroupIdsToUpdate = new HashSet<int>();
 
@@ -161,22 +176,21 @@ namespace COL.UnityGameWheels.Demo
         private void OnUpdateCheckSuccess(object context)
         {
             Debug.LogFormat("[DemoAssetApp OnUpdateCheckSuccess] context='{0}'.", context);
-            string checkGroupAssetPath = "Assets/Standard Assets/Characters/RollerBall/Prefabs/RollerBall.prefab";
-            Debug.LogFormat("[DemoAssetApp OnUpdateCheckSucces] Group ID of asset '{0}' is {1}.",
-                checkGroupAssetPath,
-                Asset.GetAssetResourceGroupId(checkGroupAssetPath));
+            Debug.LogFormat("[DemoAssetApp OnUpdateCheckSuccess] Group ID of asset '{0}' is {1}.",
+                m_CheckGroupAssetPath,
+                Asset.GetAssetResourceGroupId(m_CheckGroupAssetPath));
             UpdateCommonGroup();
         }
 
         private void UpdateCommonGroup()
         {
-            if (Asset.ResourceUpdater.GetResourceGroupStatus(Core.Asset.Constant.CommonResourceGroupId) == ResourceGroupStatus.UpToDate)
+            if (Asset.ResourceUpdater.GetResourceGroupStatus(Constant.CommonResourceGroupId) == ResourceGroupStatus.UpToDate)
             {
                 ContinueUpdateResourceGroupsOrUseAssets();
                 return;
             }
 
-            Asset.ResourceUpdater.StartUpdatingResourceGroup(Core.Asset.Constant.CommonResourceGroupId, new ResourceGroupUpdateCallbackSet
+            Asset.ResourceUpdater.StartUpdatingResourceGroup(Constant.CommonResourceGroupId, new ResourceGroupUpdateCallbackSet
             {
                 OnAllFailure = OnUpdateAllResourcesFailure,
                 OnAllSuccess = OnUpdateAllResourcesSuccess,
@@ -200,7 +214,7 @@ namespace COL.UnityGameWheels.Demo
 
             if (m_GroupIdsToUpdate.Count == 0)
             {
-                LoadFirstAsset();
+                LoadAtlas();
                 return;
             }
 
@@ -275,18 +289,7 @@ namespace COL.UnityGameWheels.Demo
                 return;
             }
 
-            LoadFirstAsset();
-        }
-
-        private void LoadFirstAsset()
-        {
-            Asset.LoadAsset("Assets/Standard Assets/Characters/RollerBall/Prefabs/RollerBall.prefab",
-                new LoadAssetCallbackSet
-                {
-                    OnFailure = OnLoadAssetFailure,
-                    OnSuccess = OnLoadAssetSuccess,
-                    OnProgress = OnLoadAssetProgress,
-                }, "Fake load asset context");
+            LoadAtlas();
         }
 
         private void OnUpdateAllResourcesFailure(string errorMessage, object context)
@@ -322,7 +325,7 @@ namespace COL.UnityGameWheels.Demo
 
         private void LoadAtlas()
         {
-            Asset.LoadAsset("Assets/__MAIN__/Prefabs/DemoAsset/DependOnSprites.prefab", new LoadAssetCallbackSet
+            Asset.LoadAsset(m_DepOnSpritePrefabPath, new LoadAssetCallbackSet
             {
                 OnFailure = null,
                 OnSuccess = OnLoadAtlasSuccess,
@@ -341,66 +344,13 @@ namespace COL.UnityGameWheels.Demo
             Instantiate(prefab);
             yield return new WaitForSeconds(5);
             Asset.UnloadAsset(assetAccessor);
-            LoadThirdPersonController();
+            StartCoroutine(LoadDepPrefabsCo());
         }
 
-        private void LoadThirdPersonController()
-        {
-            Asset.LoadAsset(
-                "Assets/Standard Assets/Characters/ThirdPersonCharacter/Prefabs/ThirdPersonController.prefab",
-                new LoadAssetCallbackSet
-                {
-                    OnSuccess = OnLoadTPCSuccess,
-                    OnFailure = OnLoadAssetFailure,
-                    OnProgress = OnLoadAssetProgress,
-                }, null);
-        }
-
-        private void OnLoadTPCSuccess(IAssetAccessor assetAccessor, object context)
-        {
-            Asset.LoadAsset("Assets/Standard Assets/2D/Prefabs/CharacterRobotBoy.prefab", new LoadAssetCallbackSet
-            {
-                OnSuccess = OnLoadCRBSuccess,
-                OnProgress = OnLoadAssetProgress,
-                OnFailure = OnLoadAssetFailure,
-            }, assetAccessor);
-        }
-
-        private void OnLoadCRBSuccess(IAssetAccessor assetAccessor, object context)
-        {
-            StartCoroutine(UnloadAndLoadTPCAgain((IAssetAccessor)context, assetAccessor));
-        }
-
-        IEnumerator UnloadAndLoadTPCAgain(IAssetAccessor tpc, IAssetAccessor crb)
-        {
-            var go = Instantiate((GameObject)tpc.AssetObject);
-            yield return new WaitForSeconds(2);
-            Destroy(go);
-            yield return new WaitForSeconds(1);
-            Asset.UnloadAsset(tpc);
-            yield return new WaitForSeconds(1);
-            Asset.LoadAsset(
-                "Assets/Standard Assets/Characters/ThirdPersonCharacter/Prefabs/ThirdPersonController.prefab",
-                new LoadAssetCallbackSet
-                {
-                    OnSuccess = OnLoadTPCSuccessAgain,
-                    OnProgress = OnLoadAssetProgress,
-                    OnFailure = OnLoadAssetFailure,
-                }, crb);
-        }
-
-        private void OnLoadTPCSuccessAgain(IAssetAccessor assetAccessor, object context)
-        {
-            var go = Instantiate((GameObject)assetAccessor.AssetObject);
-            StartCoroutine(OnLoadCRBSuccessAgainCo(assetAccessor, go, (IAssetAccessor)context));
-        }
-
-        private IEnumerator OnLoadCRBSuccessAgainCo(IAssetAccessor assetAccessor, GameObject go, IAssetAccessor crb)
+        private IEnumerator LoadDepPrefabsCo()
         {
             yield return new WaitForSeconds(3);
-            Asset.UnloadAsset(assetAccessor);
-            Asset.UnloadAsset(crb);
-            Asset.LoadAsset("Assets/__MAIN__/Prefabs/DemoAsset/PrefabADependsOnB.prefab", new LoadAssetCallbackSet
+            Asset.LoadAsset(m_PrefabADependsOnBPath, new LoadAssetCallbackSet
             {
                 OnSuccess = OnLoadPrefabADependsOnBSuccess,
                 OnFailure = OnLoadAssetFailure,
@@ -421,7 +371,7 @@ namespace COL.UnityGameWheels.Demo
             Asset.UnloadAsset(assetAccessor);
             yield return new WaitForSeconds(2f);
 
-            Asset.LoadAsset("Assets/__MAIN__/Prefabs/DemoAsset/get-pip.txt", new LoadAssetCallbackSet
+            Asset.LoadAsset(m_GetPipTextPath, new LoadAssetCallbackSet
             {
                 OnSuccess = (_assetAccessor, _context) => { LoadAnotherScene(); },
                 OnFailure = OnLoadAssetFailure,
@@ -431,14 +381,14 @@ namespace COL.UnityGameWheels.Demo
 
         private void LoadAnotherScene()
         {
-            Asset.LoadSceneAsset("Assets/Standard Assets/Effects/TessellationShaders/Scenes/TessellationSample.unity",
+            Asset.LoadSceneAsset(m_SceneAssetPath,
                 new LoadAssetCallbackSet
                 {
                     OnFailure = OnLoadAssetFailure,
                     OnSuccess = (_assetAccessor, _context) =>
                     {
                         StartCoroutine(AfterLoadScene(_assetAccessor,
-                            SceneManager.LoadSceneAsync("TessellationSample", LoadSceneMode.Single)));
+                            SceneManager.LoadSceneAsync(System.IO.Path.GetFileNameWithoutExtension(m_SceneAssetPath), LoadSceneMode.Single)));
                     },
                     OnProgress = OnLoadAssetProgress,
                 }, null);
