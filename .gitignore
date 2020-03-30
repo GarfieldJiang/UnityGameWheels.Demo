@@ -8,6 +8,7 @@
 !/Assets/StreamingAssets/.gitkeep
 /Packages
 /Logs
+/UIElementsSchema/
 
 # Visual Studio 2015 cache directory
 /.vs/
