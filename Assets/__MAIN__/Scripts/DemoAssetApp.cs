@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using COL.UnityGameWheels.Core;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
@@ -22,10 +23,10 @@ namespace COL.UnityGameWheels.Demo
         private AssetManager m_AssetManager = null;
 
         [SerializeField]
-        private RefPoolManager m_RefPoolManager = null;
+        private IRefPoolService m_RefPoolService = null;
 
         [SerializeField]
-        private DownloadManager m_DownloadManager = null;
+        private IDownloadService m_DownloadService = null;
 
         [SerializeField]
         private RemoteIndexFileInfo m_RemoteIndexFileInfo = null;
@@ -70,31 +71,31 @@ namespace COL.UnityGameWheels.Demo
             }
         }
 
-        public static IRefPoolManager RefPool
+        public static IRefPoolService RefPool
         {
             get
             {
                 CheckInstanceOrThrow();
-                if (s_Instance.m_RefPoolManager == null)
+                if (s_Instance.m_RefPoolService == null)
                 {
                     throw new NullReferenceException("Reference pool manager is invalid.");
                 }
 
-                return s_Instance.m_RefPoolManager;
+                return s_Instance.m_RefPoolService;
             }
         }
 
-        public static IDownloadManager Download
+        public static IDownloadService Download
         {
             get
             {
                 CheckInstanceOrThrow();
-                if (s_Instance.m_DownloadManager == null)
+                if (s_Instance.m_DownloadService == null)
                 {
                     throw new NullReferenceException("Download manager is invalid.");
                 }
 
-                return s_Instance.m_DownloadManager;
+                return s_Instance.m_DownloadService;
             }
         }
 
@@ -115,12 +116,12 @@ namespace COL.UnityGameWheels.Demo
 
         private void Start()
         {
-            Download.RefPoolModule = RefPool.Module;
-            Asset.DownloadModule = Download.Module;
-            Asset.RefPoolModule = RefPool.Module;
+            Download.RefPoolService = RefPool;
+            Asset.DownloadModule = Download;
+            Asset.RefPoolModule = RefPool;
 
-            RefPool.Init();
-            Download.Init();
+            RefPool.OnInit();
+            Download.OnInit();
             Asset.Init();
 
             Asset.Prepare(new AssetManagerPrepareCallbackSet

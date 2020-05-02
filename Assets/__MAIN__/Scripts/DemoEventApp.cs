@@ -14,8 +14,8 @@ namespace COL.UnityGameWheels.Demo
         [SerializeField]
         private EventManager m_EventManager = null;
 
-        [SerializeField]
-        private RefPoolManager m_RefPoolManager = null;
+        //[SerializeField]
+        private IRefPoolService m_RefPoolManager = null;
 
         public static bool IsAvailable
         {
@@ -36,7 +36,7 @@ namespace COL.UnityGameWheels.Demo
             }
         }
 
-        public static IRefPoolManager RefPool
+        public static IRefPoolService RefPool
         {
             get
             {
@@ -61,7 +61,7 @@ namespace COL.UnityGameWheels.Demo
         {
             Event.EventArgsReleaser = new SimpleEventArgsReleaser(RefPool);
 
-            RefPool.Init();
+            RefPool.OnInit();
             Event.Init();
 
             Event.AddEventListener(TestEventArgs1.TheEventId, (sender, e) => { });
@@ -105,17 +105,17 @@ namespace COL.UnityGameWheels.Demo
 
         private class SimpleEventArgsReleaser : IEventArgsReleaser
         {
-            private readonly IRefPoolManager m_RefPoolManager;
+            private readonly IRefPoolService m_RefPoolService;
 
-            public SimpleEventArgsReleaser(IRefPoolManager refPoolManager)
+            public SimpleEventArgsReleaser(IRefPoolService refPoolService)
             {
-                m_RefPoolManager = refPoolManager;
+                m_RefPoolService = refPoolService;
             }
 
             public void Release(BaseEventArgs eventArgs)
             {
                 // Clean up fields in event args instance, if needed.
-                m_RefPoolManager.GetOrAdd(eventArgs.GetType()).ReleaseObject(eventArgs);
+                m_RefPoolService.GetOrAdd(eventArgs.GetType()).ReleaseObject(eventArgs);
             }
         }
     }

@@ -1,21 +1,29 @@
 ﻿namespace COL.UnityGameWheels.Demo
 {
     using Core;
+    using Core.Ioc;
     using Unity;
+    using Unity.Ioc;
     using System;
     using System.IO;
     using UnityEngine;
 
     [DisallowMultipleComponent]
-    public class DemoDownloadApp : MonoBehaviourEx
+    public class DemoDownloadApp : UnityApp
     {
         private static DemoDownloadApp s_Instance = null;
 
         [SerializeField]
-        private RefPoolManager m_RefPoolManager = null;
+        private RefPoolServiceConfigReader m_RefPoolServiceConfigReader = null;
 
         [SerializeField]
-        private DownloadManager m_DownloadManager = null;
+        private DownloadServiceConfigReader m_DownloadServiceConfigReader = null;
+
+        [SerializeField]
+        private IRefPoolService m_RefPoolService = null;
+
+        [SerializeField]
+        private IDownloadService m_DownloadService = null;
 
         [SerializeField]
         private DownloadInfo[] m_DownloadInfos = null;
@@ -25,31 +33,31 @@
             get { return s_Instance != null; }
         }
 
-        public static IRefPoolManager RefPool
+        public static IRefPoolService RefPool
         {
             get
             {
                 CheckInstanceOrThrow();
-                if (s_Instance.m_RefPoolManager == null)
+                if (s_Instance.m_RefPoolService == null)
                 {
                     throw new NullReferenceException("Reference pool manager is invalid.");
                 }
 
-                return s_Instance.m_RefPoolManager;
+                return s_Instance.m_RefPoolService;
             }
         }
 
-        public static IDownloadManager Download
+        public static IDownloadService Download
         {
             get
             {
                 CheckInstanceOrThrow();
-                if (s_Instance.m_DownloadManager == null)
+                if (s_Instance.m_DownloadService == null)
                 {
                     throw new NullReferenceException("Download manager is invalid.");
                 }
 
-                return s_Instance.m_DownloadManager;
+                return s_Instance.m_DownloadService;
             }
         }
 
@@ -58,17 +66,17 @@
             base.Awake();
             DontDestroyOnLoad(gameObject);
             s_Instance = this;
-            
+
             Log.SetLogger(new LoggerImpl());
+            Container.BindSingleton<IRefPoolService, RefPoolService>();
+            Container.BindInstance<IRefPoolServiceConfigReader>(m_RefPoolServiceConfigReader);
+            Container.BindSingleton<IDownloadService, DownloadService>();
+            Container.BindInstance<IDownloadServiceConfigReader>(m_DownloadServiceConfigReader);
+            Container.BindSingleton<ISimpleFactory<IDownloadTaskImpl>, DownloadTaskImplFactory>();
         }
 
         private void Start()
         {
-            Download.RefPoolModule = RefPool.Module;
-
-            RefPool.Init();
-            Download.Init();
-
             for (int i = 0; i < m_DownloadInfos.Length; i++)
             {
                 if (!m_DownloadInfos[i].IsActive)
@@ -89,7 +97,7 @@
                     },
                     context: null);
 
-                Download.StartDownloading(downloadTaskInfo);
+                Container.Make<IDownloadService>().StartDownloading(downloadTaskInfo);
             }
         }
 
@@ -111,8 +119,6 @@
 
         protected override void OnDestroy()
         {
-            Download.ShutDown();
-            RefPool.ShutDown();
             s_Instance = null;
             base.OnDestroy();
         }
