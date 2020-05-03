@@ -20,46 +20,7 @@
         private DownloadServiceConfigReader m_DownloadServiceConfigReader = null;
 
         [SerializeField]
-        private IRefPoolService m_RefPoolService = null;
-
-        [SerializeField]
-        private IDownloadService m_DownloadService = null;
-
-        [SerializeField]
         private DownloadInfo[] m_DownloadInfos = null;
-
-        public static bool IsAvailable
-        {
-            get { return s_Instance != null; }
-        }
-
-        public static IRefPoolService RefPool
-        {
-            get
-            {
-                CheckInstanceOrThrow();
-                if (s_Instance.m_RefPoolService == null)
-                {
-                    throw new NullReferenceException("Reference pool manager is invalid.");
-                }
-
-                return s_Instance.m_RefPoolService;
-            }
-        }
-
-        public static IDownloadService Download
-        {
-            get
-            {
-                CheckInstanceOrThrow();
-                if (s_Instance.m_DownloadService == null)
-                {
-                    throw new NullReferenceException("Download manager is invalid.");
-                }
-
-                return s_Instance.m_DownloadService;
-            }
-        }
 
         protected override void Awake()
         {
