@@ -14,10 +14,10 @@
         private static DemoDownloadApp s_Instance = null;
 
         [SerializeField]
-        private RefPoolServiceConfigReader m_RefPoolServiceConfigReader = null;
+        private RefPoolServiceConfig m_RefPoolServiceConfig = null;
 
         [SerializeField]
-        private DownloadServiceConfigReader m_DownloadServiceConfigReader = null;
+        private DownloadServiceConfig m_DownloadServiceConfig = null;
 
         [SerializeField]
         private DownloadInfo[] m_DownloadInfos = null;
@@ -30,9 +30,9 @@
 
             Log.SetLogger(new LoggerImpl());
             Container.BindSingleton<IRefPoolService, RefPoolService>();
-            Container.BindInstance<IRefPoolServiceConfigReader>(m_RefPoolServiceConfigReader);
+            Container.BindInstance<IRefPoolServiceConfigReader>(m_RefPoolServiceConfig);
             Container.BindSingleton<IDownloadService, DownloadService>();
-            Container.BindInstance<IDownloadServiceConfigReader>(m_DownloadServiceConfigReader);
+            Container.BindInstance<IDownloadServiceConfigReader>(m_DownloadServiceConfig);
             Container.BindSingleton<ISimpleFactory<IDownloadTaskImpl>, DownloadTaskImplFactory>();
         }
 

@@ -242,9 +242,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 834a92c0f6e1a4845a4407cc0f20a46a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RefPoolServiceConfigReader: {fileID: 11400000, guid: f77287b788faf403c908db9685f5222c,
+  m_RefPoolServiceConfig: {fileID: 11400000, guid: f77287b788faf403c908db9685f5222c,
     type: 2}
-  m_DownloadServiceConfigReader: {fileID: 11400000, guid: e38f20eaa7f30429db6ad5362caa79eb,
+  m_DownloadServiceConfig: {fileID: 11400000, guid: e38f20eaa7f30429db6ad5362caa79eb,
     type: 2}
   m_DownloadInfos:
   - SavePath: 1MB_1

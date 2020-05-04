@@ -11,14 +11,14 @@ namespace COL.UnityGameWheels.Demo
     public class DemoEventApp : UnityApp
     {
         [SerializeField]
-        private RefPoolServiceConfigReader m_RefPoolServiceConfigReader = null;
+        private RefPoolServiceConfig m_RefPoolServiceConfig = null;
 
         protected override void Awake()
         {
             base.Awake();
             DontDestroyOnLoad(gameObject);
             Log.SetLogger(new LoggerImpl());
-            Container.BindInstance<IRefPoolServiceConfigReader>(m_RefPoolServiceConfigReader);
+            Container.BindInstance<IRefPoolServiceConfigReader>(m_RefPoolServiceConfig);
             Container.BindSingleton<IEventArgsReleaser, SimpleEventArgsReleaser>();
             Container.BindSingleton<IRefPoolService, RefPoolService>();
             Container.BindSingleton<IEventService, EventService>(new PropertyInjection
