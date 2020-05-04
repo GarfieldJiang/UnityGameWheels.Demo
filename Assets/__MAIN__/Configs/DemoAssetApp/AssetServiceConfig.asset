@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EditorMode: 0
   UpdateStandaloneResourcesInEditor: 1
-  UpdateIsEnabled: 1
+  UpdateIsEnabled: 0
   DownloadRetryCount: 2
   ConcurrentAssetLoaderCount: 16
   ConcurrentResourceLoaderCount: 4

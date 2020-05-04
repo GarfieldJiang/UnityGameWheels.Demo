@@ -8,10 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/__MAIN__/Scenes/DemoNet.unity
     guid: 61f111c015408bc478f2451af46399c8
-  - enabled: 0
+  - enabled: 1
     path: Assets/__MAIN__/Scenes/DemoAsset.unity
     guid: 879840820035cfb4aa89c96c953049a5
-  - enabled: 1
+  - enabled: 0
     path: Assets/__MAIN__/Scenes/DemoDownload.unity
     guid: 9db386e6f036c714e8196f97fbac55e8
   - enabled: 1

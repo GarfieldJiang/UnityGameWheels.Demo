@@ -51,6 +51,8 @@ namespace COL.UnityGameWheels.Demo
 
         private IAssetService m_AssetService = null;
 
+        private bool m_TriedToRestart = false;
+
         private IAssetService Asset
         {
             get
@@ -353,6 +355,15 @@ namespace COL.UnityGameWheels.Demo
         {
             Debug.Log($"[DemoAssetApp OnLoadAssetProgress] assetPath: {assetAccessor.AssetPath}, progress: {progress}");
         }
+
+        void OnGUI()
+        {
+            if (!m_TriedToRestart && GUILayout.Button("Restart"))
+            {
+                new GameObject("Restarter").AddComponent<Restarter>();
+            }
+        }
+
 
         [Serializable]
         private class RemoteIndexFileInfo
