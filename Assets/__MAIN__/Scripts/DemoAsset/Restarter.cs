@@ -24,7 +24,7 @@ namespace COL.UnityGameWheels.Demo
         {
             yield return null;
             yield return null;
-            SceneManager.LoadScene("DemoAsset");
+            SceneManager.LoadScene(0);
         }
     }
 }

@@ -25,7 +25,6 @@
         protected override void Awake()
         {
             base.Awake();
-            DontDestroyOnLoad(gameObject);
             s_Instance = this;
 
             Log.SetLogger(new LoggerImpl());
@@ -82,14 +81,6 @@
         {
             s_Instance = null;
             base.OnDestroy();
-        }
-
-        private static void CheckInstanceOrThrow()
-        {
-            if (s_Instance == null)
-            {
-                throw new NullReferenceException("App instance is invalid.");
-            }
         }
 
         private void OnGUI()

@@ -69,7 +69,6 @@ namespace COL.UnityGameWheels.Demo
         protected override void Awake()
         {
             base.Awake();
-            DontDestroyOnLoad(gameObject);
             Log.SetLogger(new LoggerImpl());
             Container.BindInstance<IRefPoolServiceConfigReader>(m_RefPoolServiceConfig);
             Container.BindSingleton<IRefPoolService, RefPoolService>();

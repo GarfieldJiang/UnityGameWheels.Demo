@@ -20,8 +20,6 @@ namespace COL.UnityGameWheels.Demo
         protected override void Awake()
         {
             base.Awake();
-            DontDestroyOnLoad(gameObject);
-
             Log.SetLogger(new LoggerImpl());
             Container.BindSingleton<ILogCollectionService, LogCollectionService>();
             Container.BindSingleton<ILogCallbackRegistrar, DefaultLogCallbackRegistrar>();
