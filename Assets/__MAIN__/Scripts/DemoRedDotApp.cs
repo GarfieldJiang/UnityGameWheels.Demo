@@ -1,19 +1,17 @@
 ﻿using COL.UnityGameWheels.Core.RedDot;
-using COL.UnityGameWheels.Unity.RedDot;
 using UnityEngine.UI;
 using System;
 using COL.UnityGameWheels.Unity;
+using COL.UnityGameWheels.Unity.Ioc;
+using COL.UnityGameWheels.Core.Ioc;
 using UnityEngine;
 
 namespace COL.UnityGameWheels.Demo
 {
     [DisallowMultipleComponent]
-    public class DemoRedDotApp : MonoBehaviourEx
+    public class DemoRedDotApp : UnityApp
     {
         private static DemoRedDotApp s_Instance = null;
-
-        [SerializeField]
-        private RedDotManager m_RedDotManager = null;
 
         [SerializeField]
         private string[] m_LeafConfigs = null;
@@ -21,26 +19,13 @@ namespace COL.UnityGameWheels.Demo
         [SerializeField]
         private RedDotNonLeafConfig[] m_NonLeafConfigs = null;
 
-        public static IRedDotManager RedDotManager
-        {
-            get
-            {
-                CheckInstanceOrThrow();
-                if (s_Instance.m_RedDotManager == null)
-                {
-                    throw new NullReferenceException("Download manager is invalid.");
-                }
-
-                return s_Instance.m_RedDotManager;
-            }
-        }
-
         protected override void Awake()
         {
             base.Awake();
             DontDestroyOnLoad(gameObject);
             s_Instance = this;
             Log.SetLogger(new LoggerImpl());
+            Container.BindSingleton<IRedDotService, RedDotService>();
         }
 
         protected override void OnDestroy()
@@ -53,26 +38,26 @@ namespace COL.UnityGameWheels.Demo
         {
             foreach (var nonLeaf in m_NonLeafConfigs)
             {
-                RedDotManager.AddNonLeaf(nonLeaf.Key, nonLeaf.Operation, nonLeaf.DependsOn);
+                Container.Make<IRedDotService>().AddNonLeaf(nonLeaf.Key, nonLeaf.Operation, nonLeaf.DependsOn);
             }
 
             foreach (var leaf in m_LeafConfigs)
             {
-                RedDotManager.AddLeaf(leaf);
+                Container.Make<IRedDotService>().AddLeaf(leaf);
             }
 
-            RedDotManager.SetUp();
+            Container.Make<IRedDotService>().SetUp();
 
             foreach (var leaf in m_LeafConfigs)
             {
                 var text = GameObject.Find(leaf).GetComponent<Text>();
-                RedDotManager.AddObserver(leaf, new RedDotObserver {TextWidget = text, OriginalText = text.text});
+                Container.Make<IRedDotService>().AddObserver(leaf, new RedDotObserver {TextWidget = text, OriginalText = text.text});
             }
 
             foreach (var nonLeaf in m_NonLeafConfigs)
             {
                 var text = GameObject.Find(nonLeaf.Key).GetComponent<Text>();
-                RedDotManager.AddObserver(nonLeaf.Key, new RedDotObserver {TextWidget = text, OriginalText = text.text});
+                Container.Make<IRedDotService>().AddObserver(nonLeaf.Key, new RedDotObserver {TextWidget = text, OriginalText = text.text});
             }
         }
 

@@ -1,74 +1,43 @@
 ﻿namespace COL.UnityGameWheels.Demo
 {
     using Core;
+    using Core.Ioc;
     using Unity;
+    using Unity.Ioc;
     using System;
     using System.IO;
     using UnityEngine;
 
     [DisallowMultipleComponent]
-    public class DemoDownloadApp : MonoBehaviourEx
+    public class DemoDownloadApp : UnityApp
     {
         private static DemoDownloadApp s_Instance = null;
 
         [SerializeField]
-        private RefPoolManager m_RefPoolManager = null;
+        private RefPoolServiceConfig m_RefPoolServiceConfig = null;
 
         [SerializeField]
-        private DownloadManager m_DownloadManager = null;
+        private DownloadServiceConfig m_DownloadServiceConfig = null;
 
         [SerializeField]
         private DownloadInfo[] m_DownloadInfos = null;
-
-        public static bool IsAvailable
-        {
-            get { return s_Instance != null; }
-        }
-
-        public static IRefPoolManager RefPool
-        {
-            get
-            {
-                CheckInstanceOrThrow();
-                if (s_Instance.m_RefPoolManager == null)
-                {
-                    throw new NullReferenceException("Reference pool manager is invalid.");
-                }
-
-                return s_Instance.m_RefPoolManager;
-            }
-        }
-
-        public static IDownloadManager Download
-        {
-            get
-            {
-                CheckInstanceOrThrow();
-                if (s_Instance.m_DownloadManager == null)
-                {
-                    throw new NullReferenceException("Download manager is invalid.");
-                }
-
-                return s_Instance.m_DownloadManager;
-            }
-        }
 
         protected override void Awake()
         {
             base.Awake();
             DontDestroyOnLoad(gameObject);
             s_Instance = this;
-            
+
             Log.SetLogger(new LoggerImpl());
+            Container.BindSingleton<IRefPoolService, RefPoolService>();
+            Container.BindInstance<IRefPoolServiceConfigReader>(m_RefPoolServiceConfig);
+            Container.BindSingleton<IDownloadService, DownloadService>();
+            Container.BindInstance<IDownloadServiceConfigReader>(m_DownloadServiceConfig);
+            Container.BindSingleton<ISimpleFactory<IDownloadTaskImpl>, DownloadTaskImplFactory>();
         }
 
         private void Start()
         {
-            Download.RefPoolModule = RefPool.Module;
-
-            RefPool.Init();
-            Download.Init();
-
             for (int i = 0; i < m_DownloadInfos.Length; i++)
             {
                 if (!m_DownloadInfos[i].IsActive)
@@ -89,7 +58,7 @@
                     },
                     context: null);
 
-                Download.StartDownloading(downloadTaskInfo);
+                Container.Make<IDownloadService>().StartDownloading(downloadTaskInfo);
             }
         }
 
@@ -111,8 +80,6 @@
 
         protected override void OnDestroy()
         {
-            Download.ShutDown();
-            RefPool.ShutDown();
             s_Instance = null;
             base.OnDestroy();
         }

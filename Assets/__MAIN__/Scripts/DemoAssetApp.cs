@@ -1,31 +1,29 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
+using COL.UnityGameWheels.Core;
+using COL.UnityGameWheels.Core.Ioc;
+using COL.UnityGameWheels.Core.Asset;
+using System;
+using System.Collections;
+using COL.UnityGameWheels.Unity;
+using COL.UnityGameWheels.Unity.Asset;
+using COL.UnityGameWheels.Unity.Ioc;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace COL.UnityGameWheels.Demo
 {
-    using Core.Asset;
-    using System;
-    using System.Collections;
-    using Unity;
-    using Unity.Asset;
-    using UnityEngine;
-    using UnityEngine.SceneManagement;
-
     [DisallowMultipleComponent]
-    public class DemoAssetApp : MonoBehaviourEx
+    public class DemoAssetApp : UnityApp
     {
-        private static DemoAssetApp s_Instance = null;
+        [SerializeField]
+        private AssetServiceConfig m_AssetServiceConfig = null;
 
         [SerializeField]
-        private AssetManager m_AssetManager = null;
+        private DownloadServiceConfig m_DownloadServiceConfig = null;
 
         [SerializeField]
-        private RefPoolManager m_RefPoolManager = null;
-
-        [SerializeField]
-        private DownloadManager m_DownloadManager = null;
+        private RefPoolServiceConfig m_RefPoolServiceConfig = null;
 
         [SerializeField]
         private RemoteIndexFileInfo m_RemoteIndexFileInfo = null;
@@ -51,50 +49,20 @@ namespace COL.UnityGameWheels.Demo
         private int[] m_AvailableGroupIds = null;
         private readonly HashSet<int> m_GroupIdsToUpdate = new HashSet<int>();
 
-        public static bool IsAvailable
-        {
-            get { return s_Instance != null; }
-        }
+        private IAssetService m_AssetService = null;
 
-        public static IAssetManager Asset
-        {
-            get
-            {
-                CheckInstanceOrThrow();
-                if (s_Instance.m_AssetManager == null)
-                {
-                    throw new NullReferenceException("Asset manager is invalid.");
-                }
+        private bool m_TriedToRestart = false;
 
-                return s_Instance.m_AssetManager;
-            }
-        }
-
-        public static IRefPoolManager RefPool
+        private IAssetService Asset
         {
             get
             {
-                CheckInstanceOrThrow();
-                if (s_Instance.m_RefPoolManager == null)
+                if (m_AssetService == null)
                 {
-                    throw new NullReferenceException("Reference pool manager is invalid.");
+                    m_AssetService = Container.Make<IAssetService>();
                 }
 
-                return s_Instance.m_RefPoolManager;
-            }
-        }
-
-        public static IDownloadManager Download
-        {
-            get
-            {
-                CheckInstanceOrThrow();
-                if (s_Instance.m_DownloadManager == null)
-                {
-                    throw new NullReferenceException("Download manager is invalid.");
-                }
-
-                return s_Instance.m_DownloadManager;
+                return m_AssetService;
             }
         }
 
@@ -102,40 +70,22 @@ namespace COL.UnityGameWheels.Demo
         {
             base.Awake();
             DontDestroyOnLoad(gameObject);
-            s_Instance = this;
-
             Log.SetLogger(new LoggerImpl());
-        }
-
-        protected override void OnDestroy()
-        {
-            s_Instance = null;
-            base.OnDestroy();
+            Container.BindInstance<IRefPoolServiceConfigReader>(m_RefPoolServiceConfig);
+            Container.BindSingleton<IRefPoolService, RefPoolService>();
+            Container.BindInstance<IDownloadServiceConfigReader>(m_DownloadServiceConfig);
+            Container.BindSingleton<IDownloadService, DownloadService>();
+            Container.BindSingleton<ISimpleFactory<IDownloadTaskImpl>, DownloadTaskImplFactory>();
+            AssetServiceBinder.Bind(Container, m_AssetServiceConfig, this);
         }
 
         private void Start()
         {
-            Download.RefPoolModule = RefPool.Module;
-            Asset.DownloadModule = Download.Module;
-            Asset.RefPoolModule = RefPool.Module;
-
-            RefPool.Init();
-            Download.Init();
-            Asset.Init();
-
-            Asset.Prepare(new AssetManagerPrepareCallbackSet
+            Asset.Prepare(new AssetServicePrepareCallbackSet
             {
                 OnSuccess = OnAssetManagerPrepareSuccess,
                 OnFailure = OnAssetManagerPrepareFailure,
             }, "Fake context for preparation");
-        }
-
-        private static void CheckInstanceOrThrow()
-        {
-            if (s_Instance == null)
-            {
-                throw new NullReferenceException("App instance is invalid.");
-            }
         }
 
         private void OnAssetManagerPrepareFailure(string errorMessage, object context)
@@ -405,6 +355,15 @@ namespace COL.UnityGameWheels.Demo
         {
             Debug.Log($"[DemoAssetApp OnLoadAssetProgress] assetPath: {assetAccessor.AssetPath}, progress: {progress}");
         }
+
+        void OnGUI()
+        {
+            if (!m_TriedToRestart && GUILayout.Button("Restart"))
+            {
+                new GameObject("Restarter").AddComponent<Restarter>();
+            }
+        }
+
 
         [Serializable]
         private class RemoteIndexFileInfo

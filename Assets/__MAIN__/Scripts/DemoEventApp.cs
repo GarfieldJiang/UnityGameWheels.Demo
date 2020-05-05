@@ -1,68 +1,37 @@
 ﻿using COL.UnityGameWheels.Core;
 using COL.UnityGameWheels.Unity;
-using System;
 using System.Collections;
+using COL.UnityGameWheels.Core.Ioc;
+using COL.UnityGameWheels.Unity.Ioc;
 using UnityEngine;
 
 namespace COL.UnityGameWheels.Demo
 {
     [DisallowMultipleComponent]
-    public class DemoEventApp : MonoBehaviourEx
+    public class DemoEventApp : UnityApp
     {
-        private static DemoEventApp s_Instance = null;
-
         [SerializeField]
-        private EventManager m_EventManager = null;
-
-        [SerializeField]
-        private RefPoolManager m_RefPoolManager = null;
-
-        public static bool IsAvailable
-        {
-            get { return s_Instance != null; }
-        }
-
-        public static IEventManager Event
-        {
-            get
-            {
-                CheckInstanceOrThrow();
-                if (s_Instance.m_EventManager == null)
-                {
-                    throw new NullReferenceException("Event manager is invalid.");
-                }
-
-                return s_Instance.m_EventManager;
-            }
-        }
-
-        public static IRefPoolManager RefPool
-        {
-            get
-            {
-                CheckInstanceOrThrow();
-                if (s_Instance.m_RefPoolManager == null)
-                {
-                    throw new NullReferenceException("Object pool manager is invalid.");
-                }
-
-                return s_Instance.m_RefPoolManager;
-            }
-        }
+        private RefPoolServiceConfig m_RefPoolServiceConfig = null;
 
         protected override void Awake()
         {
             base.Awake();
             DontDestroyOnLoad(gameObject);
-            s_Instance = this;
+            Log.SetLogger(new LoggerImpl());
+            Container.BindInstance<IRefPoolServiceConfigReader>(m_RefPoolServiceConfig);
+            Container.BindSingleton<IEventArgsReleaser, SimpleEventArgsReleaser>();
+            Container.BindSingleton<IRefPoolService, RefPoolService>();
+            Container.BindSingleton<IEventService, EventService>(new PropertyInjection
+            {
+                PropertyName = "MainThreadId",
+                Value = System.Threading.Thread.CurrentThread.ManagedThreadId
+            });
         }
 
         private IEnumerator Start()
         {
-            Event.EventArgsReleaser = new SimpleEventArgsReleaser(RefPool);
-
-            RefPool.Init();
-            Event.Init();
+            var Event = Container.Make<IEventService>();
+            var RefPool = Container.Make<IRefPoolService>();
 
             Event.AddEventListener(TestEventArgs1.TheEventId, (sender, e) => { });
             Event.AddEventListener(TestEventArgs1.TheEventId, OnHearEvent1);
@@ -81,41 +50,24 @@ namespace COL.UnityGameWheels.Demo
 
         private void OnHearEvent1(object sender, BaseEventArgs eventArgs)
         {
-            Debug.Log(eventArgs.GetType().Name);
+            Log.Info(eventArgs.GetType().Name);
         }
 
         private void OnHearEvent2(object sender, BaseEventArgs eventArgs)
         {
-            Debug.Log(eventArgs.GetType().Name);
+            Log.Info(eventArgs.GetType().Name);
         }
 
-        protected override void OnDestroy()
-        {
-            s_Instance = null;
-            base.OnDestroy();
-        }
-
-        private static void CheckInstanceOrThrow()
-        {
-            if (s_Instance == null)
-            {
-                throw new NullReferenceException("App instance is invalid.");
-            }
-        }
 
         private class SimpleEventArgsReleaser : IEventArgsReleaser
         {
-            private readonly IRefPoolManager m_RefPoolManager;
-
-            public SimpleEventArgsReleaser(IRefPoolManager refPoolManager)
-            {
-                m_RefPoolManager = refPoolManager;
-            }
+            [Inject]
+            public IRefPoolService RefPoolService { get; set; }
 
             public void Release(BaseEventArgs eventArgs)
             {
                 // Clean up fields in event args instance, if needed.
-                m_RefPoolManager.GetOrAdd(eventArgs.GetType()).ReleaseObject(eventArgs);
+                RefPoolService.GetOrAdd(eventArgs.GetType()).ReleaseObject(eventArgs);
             }
         }
     }

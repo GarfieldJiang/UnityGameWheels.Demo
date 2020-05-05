@@ -1,42 +1,31 @@
 ﻿using System.Threading;
+using System.Collections;
+using System.Net;
+using UnityEngine;
 
 namespace COL.UnityGameWheels.Demo
 {
     using Core.Net;
-    using System.Collections;
-    using System.Net;
+    using Core.Ioc;
     using Unity;
-    using Unity.Net;
-    using UnityEngine;
+    using Unity.Ioc;
 
-    public class DemoNetApp : MonoBehaviourEx
+    [DisallowMultipleComponent]
+    public class DemoNetApp : UnityApp
     {
-        [SerializeField] private NetManager m_Net = null;
-
-        public NetManager Net
-        {
-            get { return m_Net; }
-        }
-
-        override protected void Awake()
+        protected override void Awake()
         {
             base.Awake();
             DontDestroyOnLoad(gameObject);
             Log.SetLogger(new LoggerImpl());
-        }
-
-        override protected void OnDestroy()
-        {
-            Log.Info("[DemoNetApp OnDestroy]");
-            Net.ShutDown();
-            base.OnDestroy();
+            Container.BindSingleton<INetService, NetService>();
+            Container.BindSingleton<INetChannelFactory, DefaultNetChannelFactory>();
         }
 
         private IEnumerator Start()
         {
-            Net.ChannelFactory = new DefaultNetChannelFactory();
-            Net.Init();
-            var channel = Net.AddChannel("Simple channel", null, new SimpleNetChannelHandler(), 4);
+            var netService = Container.Make<INetService>();
+            var channel = netService.AddChannel("Simple channel", null, new SimpleNetChannelHandler(), 4);
             channel.Connect(IPAddress.Parse("127.0.0.1"), 5555);
             yield return new WaitForSeconds(3);
 

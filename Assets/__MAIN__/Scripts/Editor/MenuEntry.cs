@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Text.RegularExpressions;
+using COL.UnityGameWheels.Unity.Ioc;
 using UnityEngine;
 
 namespace COL.UnityGameWheels.Demo.Editor
@@ -84,6 +85,12 @@ namespace COL.UnityGameWheels.Demo.Editor
         private static void OpenScriptableObjectCreatorEditorWindow()
         {
             ScriptableObjectCreatorEditorWindow.Open();
+        }
+
+        [MenuItem(MenuPrefix + "Unity App Editor Window")]
+        private static void OpenUnityAppEditorWindow()
+        {
+            UnityAppEditorWindow.Open();
         }
 
         [MenuItem(MenuPrefix + "Project/Save &s")]

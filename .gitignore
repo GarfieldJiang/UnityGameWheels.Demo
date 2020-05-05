@@ -42,7 +42,7 @@ sysinfo.txt
 *.unitypackage
 
 # Unity project version
-ProjectSettings/ProjectVersion.txt
+#ProjectSettings/ProjectVersion.txt
 
 # Mac OS
 .DS_Store

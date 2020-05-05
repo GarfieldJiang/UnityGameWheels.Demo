@@ -1,34 +1,19 @@
-﻿namespace COL.UnityGameWheels.Demo
+﻿using COL.UnityGameWheels.Unity;
+using COL.UnityGameWheels.Unity.Ioc;
+using COL.UnityGameWheels.Core.Ioc;
+using System.Collections;
+using System.IO;
+using UnityEngine;
+
+namespace COL.UnityGameWheels.Demo
 {
-    using System.Collections;
-    using System.IO;
-    using Unity;
-    using UnityEngine;
-
     [DisallowMultipleComponent]
-    public class DemoLogCollectionApp : MonoBehaviourEx
+    public class DemoLogCollectionApp : UnityApp
     {
-        [SerializeField]
-        private LogCollectionManager m_LogCollection = null;
-
         [SerializeField]
         private string m_LogFileName = "DemoLog.txt";
 
-        private string LogFilePath
-        {
-            get
-            {
-                return Path.Combine(Application.persistentDataPath, m_LogFileName);
-            }
-        }
-
-        private ILogCollectionManager LogCollection
-        {
-            get
-            {
-                return m_LogCollection;
-            }
-        }
+        private string LogFilePath => Path.Combine(Application.persistentDataPath, m_LogFileName);
 
         private ILogCollector m_LogCollector = null;
 
@@ -38,8 +23,8 @@
             DontDestroyOnLoad(gameObject);
 
             Log.SetLogger(new LoggerImpl());
-
-            LogCollection.LogCallbackRegistrar = new DefaultLogCallbackRegistrar();
+            Container.BindSingleton<ILogCollectionService, LogCollectionService>();
+            Container.BindSingleton<ILogCallbackRegistrar, DefaultLogCallbackRegistrar>();
 
             if (File.Exists(LogFilePath))
             {
@@ -53,7 +38,7 @@
 
         private IEnumerator Start()
         {
-            LogCollection.Init();
+            var LogCollection = Container.Make<ILogCollectionService>();
             Log.Info("First log message");
             yield return null;
             LogCollection.AddLogCollector(m_LogCollector);
