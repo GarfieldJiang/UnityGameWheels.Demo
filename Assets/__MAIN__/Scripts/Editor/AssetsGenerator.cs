@@ -39,7 +39,8 @@ namespace COL.UnityGameWheels.Demo.Editor
 
         private static void GenerateAssetBundleInfos(AssetBundleOrganizer organizer)
         {
-            var genAssetRoot = organizer.AssetInfoForestRoots.Single(root => root.Path == GeneratedAssetPath);
+            var genAssetRoot = organizer.AssetInfoForestRoots.SingleOrDefault(root => root.Path == GeneratedAssetPath);
+
             foreach (var kv in genAssetRoot.Children)
             {
                 var assetInfo = kv.Value;

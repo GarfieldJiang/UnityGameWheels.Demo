@@ -6,6 +6,10 @@
       <Filter>t:prefab t:textasset</Filter>
     </RootDirectoryInfo>
     <RootDirectoryInfo>
+      <DirectoryGuid>f0f361851c6ba45c098a545a19bcf553</DirectoryGuid>
+      <Filter />
+    </RootDirectoryInfo>
+    <RootDirectoryInfo>
       <DirectoryGuid>fca484a638c989e4d899378f52d7c168</DirectoryGuid>
       <Filter>t:texture t:material t:model t:prefab t:anim t:scene</Filter>
     </RootDirectoryInfo>
