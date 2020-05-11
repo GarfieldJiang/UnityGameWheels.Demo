@@ -123,5 +123,11 @@ namespace COL.UnityGameWheels.Demo.Editor
         {
             Utility.Project.OpenTemporaryCachePath();
         }
+
+        [MenuItem(MenuPrefix + "Generate Assets")]
+        private static void GenerateAssets()
+        {
+            AssetsGenerator.Run();
+        }
     }
 }

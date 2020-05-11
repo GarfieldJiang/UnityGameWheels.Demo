@@ -173,6 +173,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -246,6 +247,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -477,6 +479,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -652,6 +655,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -718,6 +722,7 @@ MonoBehaviour:
   m_PrefabADependsOnBPath: Assets/__MAIN__/Prefabs/DemoAsset/PrefabADependsOnB.prefab
   m_GetPipTextPath: Assets/__MAIN__/Prefabs/DemoAsset/get-pip.txt
   m_SceneAssetPath: Assets/BayatGames/Free Platform Game Assets/Demo/Demo.unity
+  m_AssetPathWithLotsOfDependency: Assets/__MAIN__/GeneratedAssets/0_1.prefab
 --- !u!4 &1830306777
 Transform:
   m_ObjectHideFlags: 0

@@ -46,6 +46,9 @@ namespace COL.UnityGameWheels.Demo
         [SerializeField]
         private string m_SceneAssetPath = null;
 
+        [SerializeField]
+        private string m_AssetPathWithLotsOfDependency = null;
+
         private int[] m_AvailableGroupIds = null;
         private readonly HashSet<int> m_GroupIdsToUpdate = new HashSet<int>();
 
@@ -322,7 +325,11 @@ namespace COL.UnityGameWheels.Demo
 
             Asset.LoadAsset(m_GetPipTextPath, new LoadAssetCallbackSet
             {
-                OnSuccess = (_assetAccessor, _context) => { LoadAnotherScene(); },
+                OnSuccess = (_assetAccessor, _context) =>
+                {
+                    Asset.UnloadAsset(_assetAccessor);
+                    LoadAnotherScene();
+                },
                 OnFailure = OnLoadAssetFailure,
                 OnProgress = OnLoadAssetProgress,
             }, null);
@@ -348,6 +355,17 @@ namespace COL.UnityGameWheels.Demo
             yield return loadSceneOp;
             yield return new WaitForSeconds(3);
             Asset.UnloadAsset(sceneAssetAccessor);
+
+            Debug.Log($"Loading asset (with lots of dependency) starts at {Time.time}.");
+            Asset.LoadAsset(m_AssetPathWithLotsOfDependency, new LoadAssetCallbackSet
+            {
+                OnSuccess = OnLoadAssetWithLotsOfDependencySuccess,
+            }, null);
+        }
+
+        private void OnLoadAssetWithLotsOfDependencySuccess(IAssetAccessor assetAccessor, object context)
+        {
+            Debug.Log($"Loading asset (with lots of dependency) ends at {Time.time}.");
         }
 
         private void OnLoadAssetProgress(IAssetAccessor assetAccessor, float progress, object context)

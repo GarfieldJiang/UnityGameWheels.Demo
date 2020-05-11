@@ -51,3 +51,7 @@ sysinfo.txt
 .idea/
 Assets/Plugins/Editor/JetBrains
 Assets/Plugins/Editor/JetBrains.meta
+
+# Generated assets
+Assets/__MAIN__/GeneratedAssets
+Assets/__MAIN__/GeneratedAssets.meta
