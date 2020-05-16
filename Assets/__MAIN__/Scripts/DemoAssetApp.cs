@@ -355,6 +355,16 @@ namespace COL.UnityGameWheels.Demo
             yield return loadSceneOp;
             yield return new WaitForSeconds(3);
             Asset.UnloadAsset(sceneAssetAccessor);
+            LoadAssetWithLotsOfDependency();
+        }
+
+        private void LoadAssetWithLotsOfDependency()
+        {
+            if (Asset.GetAssetResourceGroupId(m_AssetPathWithLotsOfDependency) == Constant.InvalidResourceGroupId)
+            {
+                Debug.LogWarning($"Asset '{m_AssetPathWithLotsOfDependency}' cannot be found.");
+                return;
+            }
 
             Debug.Log($"Loading asset (with lots of dependency) starts at {Time.time}.");
             Asset.LoadAsset(m_AssetPathWithLotsOfDependency, new LoadAssetCallbackSet
@@ -366,6 +376,14 @@ namespace COL.UnityGameWheels.Demo
         private void OnLoadAssetWithLotsOfDependencySuccess(IAssetAccessor assetAccessor, object context)
         {
             Debug.Log($"Loading asset (with lots of dependency) ends at {Time.time}.");
+            StartCoroutine(UnloadAssetWithLotsOfDependencyCo(assetAccessor));
+        }
+
+        private IEnumerator UnloadAssetWithLotsOfDependencyCo(IAssetAccessor assetAccessor)
+        {
+            yield return new WaitForSeconds(3);
+            Debug.Log($"Unload asset (with lots of dependency).");
+            Asset.UnloadAsset(assetAccessor);
         }
 
         private void OnLoadAssetProgress(IAssetAccessor assetAccessor, float progress, object context)
