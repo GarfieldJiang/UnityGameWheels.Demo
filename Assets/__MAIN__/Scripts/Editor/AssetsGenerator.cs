@@ -6,7 +6,6 @@ using COL.UnityGameWheels.Core.Asset;
 using COL.UnityGameWheels.Unity.Editor;
 using UnityEditor;
 using UnityEngine;
-using AssetInfo = COL.UnityGameWheels.Unity.Editor.AssetBundleOrganizer.AssetInfo;
 using Object = UnityEngine.Object;
 
 namespace COL.UnityGameWheels.Demo.Editor
