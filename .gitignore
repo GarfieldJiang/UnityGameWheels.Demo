@@ -6,7 +6,6 @@
 /Assets/AssetStoreTools*
 /Assets/StreamingAssets/*
 !/Assets/StreamingAssets/.gitkeep
-/Packages
 /Logs
 /UIElementsSchema/
 
