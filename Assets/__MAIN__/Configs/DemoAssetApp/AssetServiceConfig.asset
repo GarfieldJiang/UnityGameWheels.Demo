@@ -17,7 +17,7 @@ MonoBehaviour:
   UpdateIsEnabled: 0
   DownloadRetryCount: 2
   ConcurrentAssetLoaderCount: 16
-  ConcurrentResourceLoaderCount: 4
+  ConcurrentResourceLoaderCount: 16
   AssetCachePoolCapacity: 1024
   ResourceCachePoolCapacity: 128
   AssetAccessorPoolCapacity: 1024
