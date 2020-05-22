@@ -10,7 +10,7 @@ namespace COL.UnityGameWheels.Demo
         protected override void Awake()
         {
             base.Awake();
-            UnityApp.Instance.OnShutdownComplete += OnShutdownComplete;
+            UnityApp.Instance.Container.OnShutdownComplete += OnShutdownComplete;
             UnityApp.Instance.Container.RequestShutdown();
         }
 
