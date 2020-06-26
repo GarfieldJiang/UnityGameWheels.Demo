@@ -136,13 +136,13 @@ namespace COL.UnityGameWheels.Demo
 
         private void UpdateCommonGroup()
         {
-            if (Asset.ResourceUpdater.GetResourceGroupStatus(Constant.CommonResourceGroupId) == ResourceGroupStatus.UpToDate)
+            if (Asset.ResourceUpdater.GetResourceGroupStatus(Core.Asset.Constant.CommonResourceGroupId) == ResourceGroupStatus.UpToDate)
             {
                 ContinueUpdateResourceGroupsOrUseAssets();
                 return;
             }
 
-            Asset.ResourceUpdater.StartUpdatingResourceGroup(Constant.CommonResourceGroupId, new ResourceGroupUpdateCallbackSet
+            Asset.ResourceUpdater.StartUpdatingResourceGroup(Core.Asset.Constant.CommonResourceGroupId, new ResourceGroupUpdateCallbackSet
             {
                 OnAllFailure = OnUpdateAllResourcesFailure,
                 OnAllSuccess = OnUpdateAllResourcesSuccess,
@@ -360,7 +360,7 @@ namespace COL.UnityGameWheels.Demo
 
         private void LoadAssetWithLotsOfDependency()
         {
-            if (Asset.GetAssetResourceGroupId(m_AssetPathWithLotsOfDependency) == Constant.InvalidResourceGroupId)
+            if (Asset.GetAssetResourceGroupId(m_AssetPathWithLotsOfDependency) == Core.Asset.Constant.InvalidResourceGroupId)
             {
                 Debug.LogWarning($"Asset '{m_AssetPathWithLotsOfDependency}' cannot be found.");
                 return;
