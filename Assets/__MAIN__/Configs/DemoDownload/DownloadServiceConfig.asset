@@ -15,4 +15,4 @@ MonoBehaviour:
   m_TempFileExtension: .tmp
   m_ConcurrentDownloadCountLimit: 2
   m_ChunkSizeToSave: 65536
-  m_Timeout: -1
+  m_Timeout: 30
