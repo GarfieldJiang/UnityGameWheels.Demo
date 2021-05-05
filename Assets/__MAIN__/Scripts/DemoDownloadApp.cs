@@ -85,7 +85,7 @@
 
         private void OnGUI()
         {
-            if (GUILayout.Button("Shutdown"))
+            if (GUILayout.Button("ShutDown"))
             {
                 Destroy(gameObject);
             }
