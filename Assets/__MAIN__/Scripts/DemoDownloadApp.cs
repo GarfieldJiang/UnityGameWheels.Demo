@@ -30,7 +30,7 @@
             Log.SetLogger(new LoggerImpl());
             Container.BindSingleton<IRefPoolService, RefPoolService>();
             Container.BindInstance<IRefPoolServiceConfigReader>(m_RefPoolServiceConfig);
-            Container.BindSingleton<IDownloadService, DownloadService>();
+            Container.BindSingleton<IDownloadService, DownloadService>().OnInstanceCreated(StartTickingTickable);
             Container.BindInstance<IDownloadServiceConfigReader>(m_DownloadServiceConfig);
             Container.BindSingleton<ISimpleFactory<IDownloadTaskImpl>, DownloadTaskImplFactory>();
         }

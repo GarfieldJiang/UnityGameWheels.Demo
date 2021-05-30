@@ -14,17 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EditorMode: 0
   UpdateStandaloneResourcesInEditor: 1
-  UpdateIsEnabled: 0
-  DownloadRetryCount: 2
-  ConcurrentAssetLoaderCount: 16
-  ConcurrentResourceLoaderCount: 16
-  AssetCachePoolCapacity: 1024
-  ResourceCachePoolCapacity: 128
-  AssetAccessorPoolCapacity: 1024
-  UpdateRelativePathFormat: '{0}/{1}/Server'
-  ReadWriteRelativePath: Resources
-  InstallerRelativePath: 
-  UpdateServerRootUrls:
+  m_UpdateIsEnabled: 1
+  m_DownloadRetryCount: 2
+  m_ConcurrentAssetLoaderCount: 16
+  m_ConcurrentResourceLoaderCount: 4
+  m_AssetCachePoolCapacity: 1024
+  m_ResourceCachePoolCapacity: 128
+  m_AssetAccessorPoolCapacity: 1024
+  m_UpdateRelativePathFormat: '{0}/{1}/Server'
+  m_ReadWriteRelativePath: Resources
+  m_InstallerRelativePath: 
+  m_UpdateServerRootUrls:
   - http://127.0.0.1:8000
-  ReleaseResourceInterval: 3
-  UpdateSizeBeforeSavingReadWriteIndex: 1048576
+  m_ReleaseResourceInterval: 3
+  m_UpdateSizeBeforeSavingReadWriteIndex: 1048576
