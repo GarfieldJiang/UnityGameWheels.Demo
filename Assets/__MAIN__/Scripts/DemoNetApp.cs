@@ -18,7 +18,7 @@ namespace COL.UnityGameWheels.Demo
             base.Awake();
             DontDestroyOnLoad(gameObject);
             Log.SetLogger(new LoggerImpl());
-            Container.BindSingleton<INetService, NetService>();
+            Container.BindSingleton<INetService, NetService>().OnInstanceCreated(StartTickingTickable);
             Container.BindSingleton<INetChannelFactory, DefaultNetChannelFactory>();
         }
 
@@ -31,7 +31,7 @@ namespace COL.UnityGameWheels.Demo
 
             for (int i = 0; i < 100; i++)
             {
-                channel.Send(new Packet1 {MyInt = i, MyString = new string((i % 10).ToString()[0], 8192)});
+                channel.Send(new Packet1 { MyInt = i, MyString = new string((i % 10).ToString()[0], 8192) });
             }
 
             yield return new WaitForSeconds(3);
