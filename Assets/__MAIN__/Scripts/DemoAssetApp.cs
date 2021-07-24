@@ -49,7 +49,7 @@ namespace COL.UnityGameWheels.Demo
         [SerializeField]
         private string m_AssetPathWithLotsOfDependency = null;
 
-        private int[] m_AvailableGroupIds = null;
+        private IEnumerable<int> m_AvailableGroupIds = null;
         private readonly HashSet<int> m_GroupIdsToUpdate = new HashSet<int>();
 
         private IAssetService m_AssetService = null;

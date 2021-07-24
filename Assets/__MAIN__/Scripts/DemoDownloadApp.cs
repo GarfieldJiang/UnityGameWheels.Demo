@@ -89,6 +89,12 @@
             {
                 Destroy(gameObject);
             }
+
+            if (GUILayout.Button("Disk Full"))
+            {
+                DownloadTask.StaticDebugOptions.SetIOExceptionMsg(DownloadTask.StaticDebugOptions.IOExceptionMsg.DiskFull);
+                DownloadTask.StaticDebugOptions.SetIOExceptionScenario(DownloadTask.StaticDebugOptions.IOExceptionScenario.OnWriteFile, 100);
+            }
         }
 
         [Serializable]
