@@ -714,8 +714,8 @@ MonoBehaviour:
     type: 2}
   m_RemoteIndexFileInfo:
     InternalAssetVersion: 1
-    Crc32: 2348678618
-    FileSize: 11339
+    Crc32: 835107285
+    FileSize: 179113
   m_UpdateCheckerRetryTimes: 2
   m_CheckGroupAssetPath: Assets/BayatGames/Free Platform Game Assets/Coin Animation/png/1024x128.png
   m_DepOnSpritePrefabPath: Assets/__MAIN__/Prefabs/DemoAsset/DependOnSprites.prefab

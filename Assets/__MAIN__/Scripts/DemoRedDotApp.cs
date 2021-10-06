@@ -25,7 +25,7 @@ namespace COL.UnityGameWheels.Demo
             DontDestroyOnLoad(gameObject);
             s_Instance = this;
             Log.SetLogger(new LoggerImpl());
-            Container.BindSingleton<IRedDotService, RedDotService>();
+            Container.BindSingleton<IRedDotService, RedDotService>().OnInstanceCreated(StartTickingTickable);
         }
 
         protected override void OnDestroy()

@@ -76,9 +76,9 @@ namespace COL.UnityGameWheels.Demo
             Container.BindInstance<IRefPoolServiceConfigReader>(m_RefPoolServiceConfig);
             Container.BindSingleton<IRefPoolService, RefPoolService>();
             Container.BindInstance<IDownloadServiceConfigReader>(m_DownloadServiceConfig);
-            Container.BindSingleton<IDownloadService, DownloadService>();
+            Container.BindSingleton<IDownloadService, DownloadService>().OnInstanceCreated(StartTickingTickable);
             Container.BindSingleton<ISimpleFactory<IDownloadTaskImpl>, DownloadTaskImplFactory>();
-            AssetServiceBinder.Bind(Container, m_AssetServiceConfig, this);
+            AssetServiceBinder.Bind(Container, m_AssetServiceConfig, this).OnInstanceCreated(StartTickingTickable);
         }
 
         private void Start()
@@ -99,7 +99,6 @@ namespace COL.UnityGameWheels.Demo
         private void OnAssetManagerPrepareSuccess(object context)
         {
             Debug.LogFormat("[DemoAssetApp OnAssetManagerPrepareSuccess] context='{0}'.", context);
-
             Asset.CheckUpdate((AssetIndexRemoteFileInfo)m_RemoteIndexFileInfo, new UpdateCheckCallbackSet
             {
                 OnFailure = OnUpdateCheckFailure,
@@ -155,7 +154,6 @@ namespace COL.UnityGameWheels.Demo
         private void ContinueUpdateResourceGroupsOrUseAssets()
         {
             m_AvailableGroupIds = Asset.ResourceUpdater.GetAvailableResourceGroupIds();
-
             foreach (var groupId in m_AvailableGroupIds.Where(id => id != 0))
             {
                 if (Asset.ResourceUpdater.GetResourceGroupStatus(groupId) == ResourceGroupStatus.OutOfDate)
@@ -229,6 +227,7 @@ namespace COL.UnityGameWheels.Demo
         private void OnUpdateAllResourcesSuccess(object context)
         {
             Debug.LogFormat("[DemoAssetApp OnAllResourcesUpdateSuccess] context='{0}'", context);
+
             var groupId = (int)context;
             if (groupId == Core.Asset.Constant.CommonResourceGroupId)
             {
@@ -322,7 +321,6 @@ namespace COL.UnityGameWheels.Demo
             Destroy(go);
             Asset.UnloadAsset(assetAccessor);
             yield return new WaitForSeconds(2f);
-
             Asset.LoadAsset(m_GetPipTextPath, new LoadAssetCallbackSet
             {
                 OnSuccess = (_assetAccessor, _context) =>

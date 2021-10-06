@@ -20,10 +20,11 @@ namespace COL.UnityGameWheels.Demo
             Container.BindInstance<IRefPoolServiceConfigReader>(m_RefPoolServiceConfig);
             Container.BindSingleton<IEventArgsReleaser, SimpleEventArgsReleaser>();
             Container.BindSingleton<IRefPoolService, RefPoolService>();
-            Container.BindSingleton<IEventService, EventService>(new PropertyInjection
+            Container.BindSingleton<IEventService, EventService>().OnInstanceCreated(serviceInstance =>
             {
-                PropertyName = "MainThreadId",
-                Value = System.Threading.Thread.CurrentThread.ManagedThreadId
+                var eventService = (EventService)serviceInstance;
+                eventService.MainThreadId = System.Threading.Thread.CurrentThread.ManagedThreadId;
+                eventService.StartTicking();
             });
         }
 
