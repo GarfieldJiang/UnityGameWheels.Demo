@@ -27,22 +27,22 @@ namespace COL.UnityGameWheels.Demo.Editor
         [MenuItem(MenuPrefix + "Asset Bundle/Build For Current Platform/Copy Client")]
         private static void BuildAssetBundlesForCurrentPlatformAndCopyClient()
         {
-            BuildAssetBundlesForCurrentPlatform(false);
+            BuildAssetBundlesForCurrentPlatform(PlayerSettings.bundleVersion, false);
         }
 
         [MenuItem(MenuPrefix + "Asset Bundle/Build For Current Platform/Copy Client Full")]
         private static void BuildAssetBundlesForCurrentPlatformAndCopyClientFull()
         {
-            BuildAssetBundlesForCurrentPlatform(true);
+            BuildAssetBundlesForCurrentPlatform(PlayerSettings.bundleVersion, true);
         }
 
-        private static void BuildAssetBundlesForCurrentPlatform(bool copyClientFull)
+        private static void BuildAssetBundlesForCurrentPlatform(string bundleVersion, bool copyClientFull)
         {
             var assetBundleBuilder = new AssetBundleBuilder();
             var resourcePlatform = AssetBundleBuilder.GetResourcePlatformFromBuildTarget(EditorUserBuildSettings.activeBuildTarget);
-            var internalResourceVersion = AssetBundleBuilder.GetInternalResourceVersion(Application.version, resourcePlatform);
-            assetBundleBuilder.BuildPlatform(resourcePlatform, true, false, BuildAssetBundleOptions.None);
-            var outputDirectory = Path.Combine(assetBundleBuilder.GetOutputDirectory(resourcePlatform, internalResourceVersion),
+            var internalResourceVersion = AssetBundleBuilder.GetInternalResourceVersion(bundleVersion, resourcePlatform);
+            assetBundleBuilder.BuildPlatform(resourcePlatform, bundleVersion, true, false, BuildAssetBundleOptions.None);
+            var outputDirectory = Path.Combine(assetBundleBuilder.GetOutputDirectory(resourcePlatform, bundleVersion, internalResourceVersion),
                 copyClientFull ? AssetBundleBuilder.ClientFullFolderName : AssetBundleBuilder.ClientFolderName);
 
             var di = new DirectoryInfo(Application.streamingAssetsPath);
