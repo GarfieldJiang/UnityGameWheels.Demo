@@ -14,5 +14,8 @@ namespace COL.UnityGameWheels.Demo.Editor
 
         [AssetBundleBuilderHandlerConfig]
         public static readonly Type AssetBundleBuilderHandlerType = typeof(AssetBundleBuilderHandler);
+
+        [AssetBundleOrganizerIgnoreAssetLabel]
+        public const string AssetBundleOrganizerIgnoreAssetLabel = "AssetBundleIgnored";
     }
 }
