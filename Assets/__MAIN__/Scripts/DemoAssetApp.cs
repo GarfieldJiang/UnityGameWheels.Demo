@@ -78,6 +78,7 @@ namespace COL.UnityGameWheels.Demo
             Container.BindInstance<IDownloadServiceConfigReader>(m_DownloadServiceConfig);
             Container.BindSingleton<IDownloadService, DownloadService>().OnInstanceCreated(StartTickingTickable);
             Container.BindSingleton<ISimpleFactory<IDownloadTaskImpl>, DownloadTaskImplFactory>();
+            Container.BindSingleton<IZipImpl, ZipImpl>();
             AssetServiceBinder.Bind(Container, m_AssetServiceConfig, this).OnInstanceCreated(StartTickingTickable);
         }
 

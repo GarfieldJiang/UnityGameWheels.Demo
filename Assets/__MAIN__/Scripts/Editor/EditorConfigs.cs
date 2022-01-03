@@ -1,4 +1,5 @@
 ﻿using System;
+using COL.UnityGameWheels.Core;
 using COL.UnityGameWheels.Editor;
 using COL.UnityGameWheels.Unity.Editor;
 
@@ -17,5 +18,11 @@ namespace COL.UnityGameWheels.Demo.Editor
 
         [AssetBundleOrganizerIgnoreAssetLabel]
         public const string AssetBundleOrganizerIgnoreAssetLabel = "AssetBundleIgnored";
+
+        [AssetBundleBuilderZipImplFactoryMethod]
+        public static IZipImpl AssetBundleBuilderZipImplFactoryMethod()
+        {
+            return new ZipImpl();
+        }
     }
 }
