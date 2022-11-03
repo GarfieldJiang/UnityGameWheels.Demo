@@ -173,6 +173,7 @@ namespace COL.UnityGameWheels.Demo.Editor
                 texture.Apply();
             }
 
+            Directory.CreateDirectory(GeneratedAssetPath);
             File.WriteAllBytes(Path.Combine(GeneratedAssetPath, number + ".png"), texture.EncodeToPNG());
             AssetDatabase.Refresh();
         }
